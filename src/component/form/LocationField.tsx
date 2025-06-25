@@ -23,13 +23,13 @@ export const LocationField: React.FC<Props> = ({ label, namePrefix, directions, 
 
   return (
     <div>
-      <div className="flex gap-2 mb-3">
+      <div className="flex gap-1 mb-3">
         <div className="grid grid-cols-5 border border-gray-300 rounded">
           <Label className="bg-[#F4E6CD80] col-span-2 text-gray-700 p-2">{label}</Label>
             {/* Degrees */}
             <Select onValueChange={(value) => setValue(`${namePrefix}Deg`, value)} value={deg}>
-              <SelectTrigger className="w-21 border-none">
-                <SelectValue placeholder="° Deg" />
+              <SelectTrigger className="w-19 border-none cursor-pointer">
+                <SelectValue placeholder="Deg" />
               </SelectTrigger>
               <SelectContent>
                 {generateOptions(0, maxDegrees).map((val) => (
@@ -40,7 +40,7 @@ export const LocationField: React.FC<Props> = ({ label, namePrefix, directions, 
 
             {/* Minutes */}
             <Select onValueChange={(value) => setValue(`${namePrefix}Min`, value)} value={min}>
-              <SelectTrigger className="w-18 border-none">
+              <SelectTrigger className="w-18 border-none cursor-pointer">
                 <SelectValue placeholder="Min" />
               </SelectTrigger>
               <SelectContent>
@@ -52,7 +52,7 @@ export const LocationField: React.FC<Props> = ({ label, namePrefix, directions, 
 
             {/* Seconds */}
             <Select onValueChange={(value) => setValue(`${namePrefix}Sec`, value)} value={sec}>
-              <SelectTrigger className="w-18 border-none">
+              <SelectTrigger className="w-18 border-none cursor-pointer">
                 <SelectValue placeholder={`Sec`} />
               </SelectTrigger>
               <SelectContent>
@@ -73,7 +73,7 @@ export const LocationField: React.FC<Props> = ({ label, namePrefix, directions, 
                 }}
               >
                 {directions.map((d) => (
-                  <ToggleGroupItem key={d} value={d} className="p-2 data-[state=on]:bg-blue-500 data-[state=on]:text-white">
+                  <ToggleGroupItem key={d} value={d} className="p-2 cursor-pointer data-[state=on]:bg-blue-500 data-[state=on]:text-white">
                     {d}
                   </ToggleGroupItem>
                 ))}

@@ -23,16 +23,12 @@ export const GenderField: React.FC<GenderFieldProps> = ({ name }) => {
           className="flex gap-4"
         >
           <div className="flex items-center space-x-2">
-            <RadioGroupItem value="male" id="male" />
+            <RadioGroupItem className="cursor-pointer" value="male" id="male" />
             <Label className="flex items-center space-x-2" htmlFor="male">Male</Label>
           </div>
           <div className="flex items-center space-x-2">
-            <RadioGroupItem value="female" id="female" />
+            <RadioGroupItem className="cursor-pointer" value="female" id="female" />
             <Label className="flex items-center space-x-2" htmlFor="female">Female</Label>
-          </div>
-          <div className="flex items-center space-x-2">
-            <RadioGroupItem value="other" id="other" />
-            <Label className="flex items-center space-x-2" htmlFor="other">Other</Label>
           </div>
         </RadioGroup>
         <input

@@ -107,11 +107,11 @@ export const BirthDetails: React.FC = () => {
               if (value) setValue("birthPeriod", value);
             }}  
           >
-            <ToggleGroupItem value="AM" className="px-2 py-2 data-[state=on]:bg-blue-500 data-[state=on]:text-white">
+            <ToggleGroupItem value="AM" className="px-2 py-2 cursor-pointer data-[state=on]:bg-blue-500 data-[state=on]:text-white">
               AM
               
             </ToggleGroupItem>
-            <ToggleGroupItem value="PM" className="px-2 py-2 data-[state=on]:bg-blue-500 data-[state=on]:text-white">
+            <ToggleGroupItem value="PM" className="px-2 py-2 cursor-pointer data-[state=on]:bg-blue-500 data-[state=on]:text-white">
               PM
             </ToggleGroupItem>
           </ToggleGroup>
