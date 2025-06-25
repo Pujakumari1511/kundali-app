@@ -7,7 +7,7 @@ import { SocialMedia } from "./SocialMedia"
 
 export const Home = () => {
     return (
-        <div>
+        <div className="bg-[#FAE6B8] pt-1">
             <div className="bg-[#000080] flex flex-col items-center justify-center">
                 <div className="h-70 w-80 flex items-center justify-center">
                     <img src="/assets/ganesh.png" alt="Ganesh" />
@@ -26,7 +26,7 @@ export const Home = () => {
                     </span>
                 </div>
             </div>
-            <div className="bg-[#FAE6B8] p-4">
+            <div className="p-4">
                 <div className="grid grid-cols-2 gap-4">
                     <div className="flex flex-col gap-1">
                         <Panchang />

@@ -29,7 +29,7 @@ const Service = ({name, imgSrc, altImg }: ServiceProp) => {
 export const OurServices = () => {
     return (
         <div>
-            <h3 className="text-center">Our Services</h3>
+            <h3 className="text-center pb-2">Our Services</h3>
             <div className="bg-[#FFFFFF] p-4 flex flex-col items-center justify-center">
                 <img src="/assets/pray 1.png" alt="" className="mx-auto" />
                 <h3 className="font-bold my-2 pb-10">लोकाः समस्ताः सुखिनो भवन्तु</h3>
