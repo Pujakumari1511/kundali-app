@@ -16,7 +16,7 @@ const PanchangImg = ({image, time, altImg}: PanchangImgProps) => {
 export const Panchang = () => {
     return (
         <div>
-            <h3>Panchang</h3>
+            <h3 className="pb-2">Panchang</h3>
             <div className="bg-[#FFFFFF] p-4 rounded mb-8">
                 <div className="flex justify-between items-center">
                     <div >
