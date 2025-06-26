@@ -2,8 +2,11 @@ import { StarRating } from "./StarRating"
 
 export const CustomerFeedback = () => {
     return (
-        <div>
-            <h1 className="text-3xl text-center mt-15 mb-6">Our Customer Thoughts</h1>
+        <div className="bg-[#FAE6B8] p-8">
+            <div className="flex justify-center">
+                <img src="/assets/xImage.png" alt="X" />
+            </div>
+            <h1 className="text-3xl text-center mt-2 mb-6">Our Customer Thoughts</h1>
             <div className="grid grid-cols-8 gap-15 p-16 bg-[#FFFFFF] rounded-3xl ">
                 <img className="col-span-2 h-70 object-cover rounded-full" src="/assets/customerImg.png" alt="Customer Image" />
                 <div className="col-span-5 flex flex-col justify-center items-center">
