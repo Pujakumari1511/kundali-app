@@ -23,7 +23,7 @@ export const Header = () => {
                 </div>
             <div className="flex items-center gap-x-4 text-[#43557B]">  
                 <button>Home</button>
-                <button>About</button>
+                <Link href="/about">About</Link>
                 <button>Video</button>
                 <Link href="/kundli">Kundali</Link>
                 <button>Contact</button>
@@ -34,6 +34,7 @@ export const Header = () => {
                     </button>
                 </div>
             </div>
+            <hr className="w-full border-t border-gray-200" />
         </header>    
     )
 }
