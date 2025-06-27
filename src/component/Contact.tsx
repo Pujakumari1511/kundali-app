@@ -8,25 +8,24 @@ type BoxesProps = {
 
 const Boxex = ({icon, info1, info2}: BoxesProps) => {
     return (
-        <div>
-            <div className="bg-[#FF9933] h-60 w-80 rounded-2xl text-white">
+        <div className="w-full max-w-80 mx-auto">
+            <div className="bg-[#FF9933] h-60 w-full rounded-2xl text-white">
                 <div className="flex justify-center p-5 pt-10">
-                    <img  src={icon} alt="" />
+                    <img src={icon} alt="" />
                 </div>
-                <p className="flex justify-center px-10">{info1}</p>
-                <p className="flex justify-center px-10">{info2}</p>
-
+                <p className="flex justify-center text-center px-10">{info1}</p>
+                <p className="flex justify-center text-center px-10">{info2}</p>
+            </div>
         </div>
-        </div>
-        
     )
 }
 
 export const Contact = () => {
     return (
-        <div className="bg-[#FAE6B8] px-10 pt-50 mt-30 pb-30 relative">
-            <div className="absolute left-1/2 -translate-x-1/2 top-0 z-10 w-full flex justify-center">
-                <div className="grid grid-cols-3 gap-8 justify-items-center translate-y-1/3">
+        <div className="bg-[#FAE6B8] px-4 sm:px-15 pt-10 sm:pb-5 mt-30 pb-30">
+            {/* Boxes Section */}
+            <div className="w-full flex justify-center mb-10">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 justify-items-center w-full max-w-6xl px-4">
                     <Boxex 
                         icon="/assets/locationIcon.png"
                         info1="No: 58 A, East Madison Street,"
@@ -45,12 +44,13 @@ export const Contact = () => {
                 </div>
             </div>
 
-            <div className="bg-secondary border border-[#FF9933] grid grid-cols-2 gap-8  px-15 pb-20 pt-60 rounded relative">
+            {/* Content Section */}
+            <div className="bg-secondary border border-[#FF9933] grid grid-cols-1 lg:grid-cols-2 gap-8 px-6 sm:px-15 pb-20 pt-10 rounded relative">
                 <div>
-                    <div>
+                    <div className="mb-6">
                         <img src="/assets/xImage.png" alt="X" />
                     </div>
-                    <h3 className=" font-family-stroke text-4xl pb-5">Get In Touch</h3>
+                    <h3 className="font-family-stroke text-3xl sm:text-4xl pb-5">Get In Touch</h3>
                     <p className="pb-5">
                         Get a comprehensive analysis of your characteristics, 
                         personality, temperament, strengths, and weaknesses 
@@ -69,7 +69,7 @@ export const Contact = () => {
                         So, why wait? Unlock meaningful insights and mould your future!
                     </p>
                 </div>
-                <div>
+                <div className="mt-6 lg:mt-0">
                     <ContactForm />
                 </div>
             </div> 
