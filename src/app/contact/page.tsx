@@ -1,11 +1,11 @@
 "use client";
 
-import { Home } from "../component/Home";
+import { Contact } from "../../component/Contact";
 
 export default function Page() {
   return (
     <main>
-      <Home />
+      <Contact />
     </main>
   );
 }
