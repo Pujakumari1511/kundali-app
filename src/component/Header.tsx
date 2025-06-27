@@ -22,11 +22,11 @@ export const Header = () => {
                     <img className="size-45 mt-3" src="/assets/fefdd7aaf551a3a03f9a2cf595d1fda42a39f963.png" alt="Vedic Jyotishe Logo" />
                 </div>
             <div className="flex items-center gap-x-4 text-[#43557B]">  
-                <button>Home</button>
+                <Link href="/">Home</Link>
                 <Link href="/about">About</Link>
                 <button>Video</button>
                 <Link href="/kundli">Kundali</Link>
-                <button>Contact</button>
+                <Link href="/contact">Contact</Link>
             </div>
                 <div className="bg-orange-400 rounded-3xl text-white p-2 px-4 text-md text-base">
                     <button>
