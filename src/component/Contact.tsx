@@ -22,7 +22,7 @@ const Boxex = ({icon, info1, info2}: BoxesProps) => {
 
 export const Contact = () => {
     return (
-        <div className="bg-[#FAE6B8] px-4 sm:px-15 pt-10 sm:pb-5 mt-30 pb-30">
+        <div className="bg-[#FAE6B8] px-4 sm:px-15 pt-10 sm:pb-5 pb-20">
             {/* Boxes Section */}
             <div className="w-full flex justify-center mb-10">
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 justify-items-center w-full max-w-6xl px-4">
@@ -45,12 +45,12 @@ export const Contact = () => {
             </div>
 
             {/* Content Section */}
-            <div className="bg-secondary border border-[#FF9933] grid grid-cols-1 lg:grid-cols-2 gap-8 px-6 sm:px-15 pb-20 pt-10 rounded relative">
+            <div id="contactpage" className="bg-secondary border border-[#FF9933] grid grid-cols-1 lg:grid-cols-2 gap-8 px-6 sm:px-15 pb-20 pt-10 rounded relative">
                 <div>
                     <div className="mb-6">
                         <img src="/assets/xImage.png" alt="X" />
                     </div>
-                    <h3 className="font-family-stroke text-3xl sm:text-4xl pb-5">Get In Touch</h3>
+                    <h3 className="text-3xl sm:text-4xl pb-5">Get In Touch</h3>
                     <p className="pb-5">
                         Get a comprehensive analysis of your characteristics, 
                         personality, temperament, strengths, and weaknesses 

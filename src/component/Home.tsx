@@ -13,7 +13,7 @@ export const Home = () => {
                     <img src="/assets/ganesh.png" alt="Ganesh" />
                 </div>
                 <div>
-                    <p className="text-[#FF9933] text-2xl text-center px-80 pb-15">
+                    <p className="text-[#FF9933] text-sm md:text-2xl text-center px-20 md:px-80 pb-15">
                         ॐ गन गणपतए नमो नमः श्री सिद्धि विनायक नमो
                         नमः अष्टविनायकनमो नमः गणपति बाप्पा मोरया |
                     </p>
@@ -27,21 +27,21 @@ export const Home = () => {
                 </div>
             </div>
             <div className="p-4">
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="flex flex-col gap-1">
                         <Panchang />
+                        <div className="md:hidden">
+                            <OurServices />
+                        </div>
                         <SocialMedia />
                         <NewsArticles />
                     </div>
-                    <div>
+                    <div className="hidden md:block">
                         <OurServices />   
                     </div>
                 </div>
                 <CustomerFeedback />
-
-            </div>
-        
-            
+            </div>   
         </div>
     )
 }

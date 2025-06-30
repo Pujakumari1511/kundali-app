@@ -58,7 +58,7 @@ const SocialMediaDetails = ({image, altImg, headerText, paraText, socialMediaIco
 export const SocialMedia = () => (
   <div>
     <h1 className="text-xl pb-1">Social Media Feed</h1>
-    <div className="grid grid-cols-2 gap-4">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
       {socialMediaData.map((item, idx) => (
         <SocialMediaDetails
           key={idx}
