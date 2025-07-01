@@ -22,7 +22,7 @@ const MobileViewHeader = () => {
                 </div>
             </div>
             </header>
-            <div  id="floating-header" className="sticky top-0 bg-white z-50 shadow-md">
+            <div className=" bg-white z-50 shadow-md">
                 <div className="flex justify-between items-center p-4">
                     <div>
                         <img className="size-15" src="/assets/fefdd7aaf551a3a03f9a2cf595d1fda42a39f963.png" alt="Vedic Jyotishe Logo" />
@@ -149,7 +149,7 @@ export const Header = () => {
             <div className="hidden md:block">
                 <TabAndDeskTopHeader />
             </div>
-            <div className="md:hidden">
+            <div className="md:hidden sticky top-0">
                 <MobileViewHeader />
             </div>
              

@@ -3,6 +3,7 @@ import { CustomerFeedback } from "./CustomerFeedback"
 export const About = () => {
     return (
         <div className="bg-bg-white">
+            <hr className="border-t-2 border-[#FF9933] w-full pb-5" />
             <div className="flex justify-center">
                 <img src="/assets/xImage.png" alt="X" />
             </div>

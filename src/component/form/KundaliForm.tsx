@@ -28,8 +28,7 @@ export const KundaliForm: React.FC = () => {
         <FormProvider {...methods}>
           <h3 className="text-[#FF9933] text-lg py-4">Fill the form to get your kundli</h3>
           <p className="text-xs pb-2">Name & Gender</p>
-          <div className="text-xs">
-            <form onSubmit={methods.handleSubmit(onSubmit)} className="">
+            <form onSubmit={methods.handleSubmit(onSubmit)} className="text-xs [&_*]:text-xs">
                 <InputField
                   fieldId="name"
                   label="Name"
@@ -76,8 +75,7 @@ export const KundaliForm: React.FC = () => {
                     </Button>
                   </div>
                 </div>
-            </form>
-          </div>  
+            </form>  
       </FormProvider>
     </div>
     

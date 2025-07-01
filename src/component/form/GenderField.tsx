@@ -34,8 +34,7 @@ export const GenderField: React.FC<GenderFieldProps> = ({ name }) => {
         <input
           type="hidden"
           {...register(name, { required: "Gender is required" })}
-        />
-        
+        /> 
       </div>
     </div>
     

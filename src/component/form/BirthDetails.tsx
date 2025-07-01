@@ -23,9 +23,9 @@ export const BirthDetails: React.FC = () => {
     <div>
       <div className="grid grid-cols-3 gap-4 border border-gray-300 mb-3 rounded">
         <Label className="bg-[#F4E6CD80] col-span-1 text-gray-700 p-2">Date</Label>
-        <div className="flex gap-1">
+        <div className="flex">
           <Select onValueChange={(value) => setValue("birthDay", value)} value={birthDay}>
-            <SelectTrigger className="w-19 border-none">
+            <SelectTrigger className="w-16 border-none">
               <SelectValue placeholder="DD" />
             </SelectTrigger>
             <SelectContent>
@@ -38,7 +38,7 @@ export const BirthDetails: React.FC = () => {
           </Select>
 
           <Select onValueChange={(value) => setValue("birthMonth", value)} value={birthMonth}>
-            <SelectTrigger className="w-23 border-none">
+            <SelectTrigger className="w-20 border-none">
               <SelectValue placeholder="MM" />
             </SelectTrigger>
             <SelectContent>
@@ -54,7 +54,7 @@ export const BirthDetails: React.FC = () => {
           </Select>
 
           <Select onValueChange={(value) => setValue("birthYear", value)} value={birthYear}>
-            <SelectTrigger className="w-24 border-none">
+            <SelectTrigger className="w-20 border-none">
               <SelectValue placeholder="YYYY" />
             </SelectTrigger>
             <SelectContent>
@@ -67,11 +67,10 @@ export const BirthDetails: React.FC = () => {
           </Select>
         </div>
       </div>
-      <div className="flex gap-2 mb-3">
+      <div className="flex gap-1 mb-3">
         {/* Time Box */}
         <div className="grid grid-cols-5 border border-gray-300 rounded">
-          <Label className="bg-[#F4E6CD80] col-span-2 text-gray-700 p-2">Time</Label>
-            
+          <Label className="bg-[#F4E6CD80] col-span-2 text-gray-700 pl-2">Time</Label>
               <Select onValueChange={(value) => setValue("birthHour", value)} value={birthHour}>
                 <SelectTrigger className="w-17 border-none">
                   <SelectValue placeholder="HH" />
@@ -85,7 +84,7 @@ export const BirthDetails: React.FC = () => {
                 </SelectContent>
               </Select> 
               <Select onValueChange={(value) => setValue("birthMinute", value)} value={birthMinute}>
-                <SelectTrigger className="w-22 border-none">
+                <SelectTrigger className="w-18 border-none">
                   <SelectValue placeholder="MM" />
                 </SelectTrigger>
                 <SelectContent>
