@@ -26,11 +26,11 @@ export const Panchang = () => {
                     <button className="bg-[#FF9933] p-1 rounded text-sm text-[#FFFFFF]">Detailed Panchang</button>   
                 </div>
                 <div className="grid grid-cols-3 gap-3 items-center">
-                    <hr className="border-t-1 border-[#43557B] w-45" />
+                    <hr className="border-t-1 border-[#43557B] w-25 md:w-45" />
                     <p className="text-sm font-medium text-[#43557B] text-center">Friday, 13 June 2025</p>
-                    <hr className="border-t-1 border-[#43557B] w-45" />
+                    <hr className="border-t-1 border-[#43557B] w-25 md:w-45" />
                 </div>
-                <div className="grid grid-cols-4 gap-6 py-4">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-6 py-4">
                     <div className="bg-[#FF9933] rounded">
                         <PanchangImg
                             image="/assets/orangePanchangImg.png"
@@ -48,14 +48,14 @@ export const Panchang = () => {
                     <div className="bg-[#1E3A8A] rounded">
                         <PanchangImg
                             image="/assets/bluePanchangImg.png"
-                            altImg="orangePanchangImg"
+                            altImg="BluePanchangImg"
                             time="12.10.28" 
                         />
                     </div>
                     <div  className="bg-[#1E3A8A] rounded">
                         <PanchangImg
                             image="/assets/bluePanchangImg.png"
-                            altImg="orangePanchangImg"
+                            altImg="BluePanchangImg"
                             time="22.13.7" 
                         />
                     </div>
@@ -67,12 +67,12 @@ export const Panchang = () => {
                             <h5>Month</h5>
                             <p>Amanta: <b>Ashwin</b></p>
                             <p>Purnimanta: <b>Ashwin</b></p>
-                            <hr className="border-t-1 border-gray-300 w-63 my-2" />
+                            <hr className="border-t-1 border-gray-300 w-30 md:w-63 my-2" />
                         </div>
                         <div>
                             <p>Tithi: <b>Shukla Shashthi</b></p>
                             <p>Till: <b>2024-10-09 12:15:55</b></p>
-                            <hr className="border-t-1 border-gray-300 w-63 my-2" />
+                            <hr className="border-t-1 border-gray-300 w-30 md:w-63 my-2" />
                         </div>
                         <div>
                             <p>Yog: <b>Shobhan</b></p>
@@ -84,12 +84,12 @@ export const Panchang = () => {
                             <h5>Samvat</h5>
                             <p>Vikram: <b>2081 Peengal</b></p>
                             <p>Shaka: <b>1946 Krodhi</b></p>
-                            <hr className="border-t-1 border-gray-300 w-63 my-2" />
+                            <hr className="border-t-1 border-gray-300 w-30 md:w-63 my-2" />
                         </div>
                         <div>
                             <p>Nakshatra: <b>Mool</b> </p>
                             <p>Till: <b>2024-10-10 05:15:08</b></p>
-                            <hr className="border-t-1 border-gray-300 w-63 my-2" />
+                            <hr className="border-t-1 border-gray-300 w-30 md:w-63 my-2" />
                         </div>
                         <div>
                             <p>Karan: <b>Taitil</b></p>

@@ -1,7 +1,7 @@
 export const Footer = () => {
   return (
-  <footer className="bg-white-800 text-#43557B px-12 py-4">
-    <div className="grid grid-cols-3 gap-8">
+  <footer className="bg-white-800 text-#43557B px-12   py-4">
+    <div className="flex flex-col items-center justify-center gap-8 md:grid md:grid-cols-3 md:gap-8">
       <img className="size-55" src="/assets/fefdd7aaf551a3a03f9a2cf595d1fda42a39f963.png" alt="Vedic Jyotishe Logo" />  
       <div className="flex items-center gap-4 m-auto">
         <img className="size-15" src="/assets/phone.svg" alt="phone"/>
@@ -19,12 +19,12 @@ export const Footer = () => {
       </div>
     </div>
 
-    <div className="grid grid-cols-3 gap-12">
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
       <div className="mx-10">
-        <p className="text-sm text-gray-600 mt-2">
-            Contact us for an in-depth analysis for your kundali chart, tailored
-            to your specific areas of concern. We ensure complete client confidentiality at all the times.
-        </p>
+      <p className="pt-4 text-sm text-gray-600 mt-2">
+        Contact us for an in-depth analysis for your kundali chart, tailored
+        to your specific areas of concern. We ensure complete client confidentiality at all the times.
+      </p>
         <div className="flex items-center gap-4 mt-8">
           <img className="size-10" src="/assets/twitter_icon.svg" alt="twitter"/>
           <img className="size-10" src="/assets/fb_icon.svg" alt="facebook"/>

@@ -25,7 +25,7 @@ export const NewsArticles = () => {
         <div>
             <h1 className="text-2xl py-4">News & Articles</h1>
             
-            <div className="grid grid-cols-2 gap-2 ">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-2 ">
                 <div className="p-4 bg-[#FFFFFF] rounded">
                     <News 
                         headerText="What's the news?"
