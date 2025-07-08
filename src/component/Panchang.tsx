@@ -1,3 +1,6 @@
+import { useEffect, useState } from "react";
+import { PanchangData } from "@/types/panchang";
+
 
 interface PanchangImgProps {
     image: string;
@@ -13,7 +16,54 @@ const PanchangImg = ({image, time, altImg}: PanchangImgProps) => {
     )
 }
 
+
 export const Panchang = () => {
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState<string | null>(null);
+    const [panchangData, setPanchangData] = useState<PanchangData>();
+
+
+    // current day, date and year
+    const now = new Date();
+    const options: Intl.DateTimeFormatOptions = {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+    };
+    const formattedDate = now.toLocaleDateString('en-US', options);
+
+    const fetchPanchang = async () => {
+        setLoading(true);
+        setError(null);
+
+        try {
+           
+
+            const response = await fetch('/api/panchang', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to fetch panchang data')
+            }
+            const data: PanchangData = await response.json();
+            setPanchangData(data);
+            console.log('Panchang data:', data);
+        } catch (error) {
+            setError(error instanceof Error ? error.message: 'An error occured')
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    useEffect(() => {
+        fetchPanchang();
+    }, []);
+
     return (
         <div>
             <h3 className="pb-2">Panchang</h3>
@@ -23,11 +73,19 @@ export const Panchang = () => {
                         <h5>Aaj Ka Panchang</h5>
                         <p className="text-sm">New Delhi, India</p>
                     </div>
-                    <button className="bg-[#FF9933] p-1 rounded text-sm text-[#FFFFFF]">Detailed Panchang</button>   
+                    <button className="bg-[#FF9933] p-1 rounded text-sm text-[#FFFFFF]">
+                        Detailed Panchang
+                    </button>   
                 </div>
+                {error && (
+                    <div className="text-red-500 text-sm mt-2">
+                        Error: {error}
+                    </div>
+                )}
+
                 <div className="grid grid-cols-3 gap-3 items-center">
                     <hr className="border-t-1 border-[#43557B] w-25 md:w-45" />
-                    <p className="text-sm font-medium text-[#43557B] text-center">Friday, 13 June 2025</p>
+                    <p className="text-sm font-medium text-[#43557B] text-center">{formattedDate}</p>
                     <hr className="border-t-1 border-[#43557B] w-25 md:w-45" />
                 </div>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-6 py-4">
@@ -65,35 +123,35 @@ export const Panchang = () => {
                     <div>
                         <div>
                             <h5>Month</h5>
-                            <p>Amanta: <b>Ashwin</b></p>
-                            <p>Purnimanta: <b>Ashwin</b></p>
+                            <p>Amanta: <b>{panchangData?.month?.lunarMonthName || 'Loading...'}</b></p>
+                            <p>Purnimanta: <b>{panchangData?.month?.lunarMonthFullName || 'Loading'}</b></p>
                             <hr className="border-t-1 border-gray-300 w-30 md:w-63 my-2" />
                         </div>
                         <div>
-                            <p>Tithi: <b>Shukla Shashthi</b></p>
-                            <p>Till: <b>2024-10-09 12:15:55</b></p>
+                            <p>Tithi: <b>{panchangData?.tithi?.name || 'Loading...'}</b></p>
+                            <p>Till: <b>{panchangData?.tithi?.completion ? new Date(panchangData.tithi.completion).toLocaleString() : 'Loading...'}</b></p>
                             <hr className="border-t-1 border-gray-300 w-30 md:w-63 my-2" />
                         </div>
                         <div>
-                            <p>Yog: <b>Shobhan</b></p>
-                            <p>Till: <b>2024-10-10 05:53:23</b></p>
+                            <p>Yog: <b>{panchangData?.yog?.name || 'Loading...'}</b></p>
+                            <p>Till: <b>{panchangData?.yog?.completion ? new Date(panchangData.yog.completion).toLocaleString() : 'Loading...'}</b></p>
                         </div>    
                     </div>
                     <div>
                         <div>
                             <h5>Samvat</h5>
-                            <p>Vikram: <b>2081 Peengal</b></p>
-                            <p>Shaka: <b>1946 Krodhi</b></p>
+                            <p>Vikram: <b>{panchangData?.samvat?.vikram || 'Loading...'}</b></p>
+                            <p>Shaka: <b>{panchangData?.samvat?.saka || 'Loading...'} </b></p>
                             <hr className="border-t-1 border-gray-300 w-30 md:w-63 my-2" />
                         </div>
                         <div>
-                            <p>Nakshatra: <b>Mool</b> </p>
-                            <p>Till: <b>2024-10-10 05:15:08</b></p>
+                            <p>Nakshatra: <b>{panchangData?.nakshatra?.name || 'Loading...'}</b> </p>
+                            <p>Till: <b>{panchangData?.nakshatra?.completion ? new Date(panchangData.nakshatra.completion).toLocaleString() : 'Loading...'}</b></p>
                             <hr className="border-t-1 border-gray-300 w-30 md:w-63 my-2" />
                         </div>
                         <div>
-                            <p>Karan: <b>Taitil</b></p>
-                            <p>Purnimanta: <b>2024-10-09 12:12:55</b></p>
+                            <p>Karan: <b>{panchangData?.karan?.name || 'Loading...'}</b></p>
+                            <p>Purnimanta: <b>{panchangData?.karan?.completion ? new Date(panchangData.karan.completion).toLocaleString() : 'Loading...'}</b></p>
                         </div>
                     </div>
                 </div>
