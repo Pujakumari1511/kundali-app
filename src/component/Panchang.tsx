@@ -18,7 +18,6 @@ const PanchangImg = ({image, time, altImg}: PanchangImgProps) => {
 
 
 export const Panchang = () => {
-    const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const [panchangData, setPanchangData] = useState<PanchangData>();
 
@@ -34,19 +33,15 @@ export const Panchang = () => {
     const formattedDate = now.toLocaleDateString('en-US', options);
 
     const fetchPanchang = async () => {
-        setLoading(true);
         setError(null);
 
         try {
-           
-
             const response = await fetch('/api/panchang', {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
                 },
             });
-
             if (!response.ok) {
                 throw new Error('Failed to fetch panchang data')
             }
@@ -55,8 +50,6 @@ export const Panchang = () => {
             console.log('Panchang data:', data);
         } catch (error) {
             setError(error instanceof Error ? error.message: 'An error occured')
-        } finally {
-            setLoading(false);
         }
     };
 
@@ -123,40 +116,39 @@ export const Panchang = () => {
                     <div>
                         <div>
                             <h5>Month</h5>
-                            <p>Amanta: <b>{panchangData?.month?.lunarMonthName || 'Loading...'}</b></p>
-                            <p>Purnimanta: <b>{panchangData?.month?.lunarMonthFullName || 'Loading'}</b></p>
+                            <p>Amanta: <b>{panchangData?.month?.lunarMonthName}</b></p>
+                            <p>Purnimanta: <b>{panchangData?.month?.lunarMonthFullName}</b></p>
                             <hr className="border-t-1 border-gray-300 w-30 md:w-63 my-2" />
                         </div>
                         <div>
-                            <p>Tithi: <b>{panchangData?.tithi?.name || 'Loading...'}</b></p>
-                            <p>Till: <b>{panchangData?.tithi?.completion ? new Date(panchangData.tithi.completion).toLocaleString() : 'Loading...'}</b></p>
+                            <p>Tithi: <b>{panchangData?.tithi?.name}</b></p>
+                            <p>Till: <b>{panchangData?.tithi?.completion && new Date(panchangData.tithi.completion).toLocaleString()}</b></p>
                             <hr className="border-t-1 border-gray-300 w-30 md:w-63 my-2" />
                         </div>
                         <div>
-                            <p>Yog: <b>{panchangData?.yog?.name || 'Loading...'}</b></p>
-                            <p>Till: <b>{panchangData?.yog?.completion ? new Date(panchangData.yog.completion).toLocaleString() : 'Loading...'}</b></p>
+                            <p>Yog: <b>{panchangData?.yog?.name}</b></p>
+                            <p>Till: <b>{panchangData?.yog?.completion && new Date(panchangData.yog.completion).toLocaleString()}</b></p>
                         </div>    
                     </div>
                     <div>
                         <div>
                             <h5>Samvat</h5>
-                            <p>Vikram: <b>{panchangData?.samvat?.vikram || 'Loading...'}</b></p>
-                            <p>Shaka: <b>{panchangData?.samvat?.saka || 'Loading...'} </b></p>
+                            <p>Vikram: <b>{panchangData?.samvat?.vikram}</b></p>
+                            <p>Shaka: <b>{panchangData?.samvat?.saka} </b></p>
                             <hr className="border-t-1 border-gray-300 w-30 md:w-63 my-2" />
                         </div>
                         <div>
-                            <p>Nakshatra: <b>{panchangData?.nakshatra?.name || 'Loading...'}</b> </p>
-                            <p>Till: <b>{panchangData?.nakshatra?.completion ? new Date(panchangData.nakshatra.completion).toLocaleString() : 'Loading...'}</b></p>
+                            <p>Nakshatra: <b>{panchangData?.nakshatra?.name}</b> </p>
+                            <p>Till: <b>{panchangData?.nakshatra?.completion && new Date(panchangData.nakshatra.completion).toLocaleString()}</b></p>
                             <hr className="border-t-1 border-gray-300 w-30 md:w-63 my-2" />
                         </div>
                         <div>
-                            <p>Karan: <b>{panchangData?.karan?.name || 'Loading...'}</b></p>
-                            <p>Purnimanta: <b>{panchangData?.karan?.completion ? new Date(panchangData.karan.completion).toLocaleString() : 'Loading...'}</b></p>
+                            <p>Karan: <b>{panchangData?.karan?.name}</b></p>
+                            <p>Purnimanta: <b>{panchangData?.karan?.completion && new Date(panchangData.karan.completion).toLocaleString()}</b></p>
                         </div>
                     </div>
                 </div>
-            </div>   
-            
+            </div>      
         </div>
     )
 }

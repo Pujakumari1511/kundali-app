@@ -1,8 +1,14 @@
-import { CustomerFeedback } from "./CustomerFeedback"
-import { NewsArticles } from "./NewsArticles"
-import { OurServices } from "./OurServices"
-import { Panchang } from "./Panchang"
-import { SocialMedia } from "./SocialMedia"
+import { CustomerFeedback } from "./CustomerFeedback";
+import { NewsArticles } from "./NewsArticles";
+import { OurServices } from "./OurServices";
+import { Panchang } from "./Panchang";
+import { SocialMedia } from "./SocialMedia";
+import { Suspense } from "react";
+
+
+const Loading = () => {
+    return <h2>Loading...</h2>
+}
 
 
 export const Home = () => {
@@ -29,7 +35,9 @@ export const Home = () => {
             <div className="p-4">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="flex flex-col gap-1">
-                        <Panchang />
+                        <Suspense fallback={<Loading />}>
+                            <Panchang />
+                        </Suspense>
                         <div className="md:hidden">
                             <OurServices />
                         </div>

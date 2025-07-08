@@ -105,7 +105,7 @@ export const getTithi = async(): Promise<NameAndCompletion | undefined> => {
         
     } catch (error) {
         console.error('Error fetching panchang data:', error);
-        
+        return undefined;
     }
 }
 
@@ -165,6 +165,7 @@ export const getYog = async () => {
         return yog;
     } catch (error) {
         console.error('Error fetching panchang data:', error);
+        return undefined;
     }
 }
 
@@ -193,6 +194,7 @@ export const getSamvat = async () => {
 
     } catch (error) {
         console.error('Error fetching panchang data:', error);
+        return undefined;
     }
 }
 
@@ -212,9 +214,7 @@ export const getNakshatra = async () => {
         }
 
         const nakshatraResult = await nakshatraResponse.json() as FreeAstrologyResponse;
-        console.log(nakshatraResult)
         const nakshatraOutput = JSON.parse(nakshatraResult.output) as NakshatraOutput;
-        console.log(nakshatraOutput)
 
         const nakshatra: NameAndCompletion = {
             name: nakshatraOutput.name,
@@ -224,6 +224,7 @@ export const getNakshatra = async () => {
         return nakshatra;
     } catch (error) {
         console.error('Error fetching panchang data:', error);
+        return undefined;
     }
 }
 
@@ -254,6 +255,7 @@ export const getKaran = async () => {
         return karan
 
     } catch (error) {
-         console.error('Error fetching panchang data:', error);
+        console.error('Error fetching panchang data:', error);
+        return undefined;
     }
 }
