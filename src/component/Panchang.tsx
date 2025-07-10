@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
 import { PanchangData } from "@/types/panchang";
+import {use} from 'react';
 
 
 interface PanchangImgProps {
@@ -16,14 +16,29 @@ const PanchangImg = ({image, time, altImg}: PanchangImgProps) => {
     )
 }
 
+const fetchPanchangData = async (): Promise<PanchangData> => {
+    const apiUrl = process.env.NEXT_PUBLIC_API_BASE_URL
+        ? `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/panchang`
+        : 'http://localhost:3000/api/panchang';
+    const response = await fetch(apiUrl, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    });
+     if (!response.ok) {
+        throw new Error('Failed to fetch panchang data');
+    }
+    return response.json();
+};
+
+const panchangPromise = fetchPanchangData();
 
 export const Panchang = () => {
-    const [error, setError] = useState<string | null>(null);
-    const [panchangData, setPanchangData] = useState<PanchangData>();
-
+    const panchangData = use(panchangPromise);
 
     // current day, date and year
-    const now = new Date();
+    const now = new Date("09-07-2025");
     const options: Intl.DateTimeFormatOptions = {
         weekday: 'long',
         year: 'numeric',
@@ -31,31 +46,6 @@ export const Panchang = () => {
         day: 'numeric',
     };
     const formattedDate = now.toLocaleDateString('en-US', options);
-
-    const fetchPanchang = async () => {
-        setError(null);
-
-        try {
-            const response = await fetch('/api/panchang', {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            });
-            if (!response.ok) {
-                throw new Error('Failed to fetch panchang data')
-            }
-            const data: PanchangData = await response.json();
-            setPanchangData(data);
-            console.log('Panchang data:', data);
-        } catch (error) {
-            setError(error instanceof Error ? error.message: 'An error occured')
-        }
-    };
-
-    useEffect(() => {
-        fetchPanchang();
-    }, []);
 
     return (
         <div>
@@ -70,11 +60,6 @@ export const Panchang = () => {
                         Detailed Panchang
                     </button>   
                 </div>
-                {error && (
-                    <div className="text-red-500 text-sm mt-2">
-                        Error: {error}
-                    </div>
-                )}
 
                 <div className="grid grid-cols-3 gap-3 items-center">
                     <hr className="border-t-1 border-[#43557B] w-25 md:w-45" />
