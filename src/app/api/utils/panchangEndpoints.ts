@@ -1,15 +1,6 @@
 
 import { Month, NameAndCompletion, Samvat } from "@/types/panchang";
-
-
-const api_key = process.env.ASTROLOGY_API_KEY || "";
-const url = "https://json.freeastrologyapi.com";
-
-
-interface FreeAstrologyResponse {
-    statusCode: number;
-    output: string;
-}
+import { fetchAstrologer } from "./astrologerService";
 
 interface MonthOutput {
     lunar_month_name: string;
@@ -80,53 +71,34 @@ const getRequestData = (): RequestData => {
 };
 
 
-export const getTithi = async(): Promise<NameAndCompletion | undefined> => {
+export const getTithi = async(): Promise<NameAndCompletion> => {
     try {
-        const requestData = getRequestData();
-        const tithiResponse = await fetch(`${url}/tithi-durations`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'x-api-key': api_key
-            },
-            body: JSON.stringify(requestData)
+        const tithiResult = await fetchAstrologer({
+            path: "/tithi-durations",
+            method: "POST",
+            body: getRequestData(),
         });
-        if (!tithiResponse.ok) {
-            throw new Error(`HTTP error! status: ${tithiResponse.status}`)
-        }
-        const tithiResult = await tithiResponse.json() as FreeAstrologyResponse;
-        const tithiOutput = JSON.parse(tithiResult.output) as TithiOutput;
+        const tithiOutput = JSON.parse(tithiResult) as TithiOutput;
 
         const tithi: NameAndCompletion = {
             name: tithiOutput.name,
             completion: tithiOutput.completes_at
         }
-        return tithi;
-        
+        return tithi;    
     } catch (error) {
-        console.error('Error fetching panchang data:', error);
-        
+        console.error('Error fetching tithi:', error);
+        throw error;
     }
 }
 
-export const getMonth = async () => {
+export const getMonth = async(): Promise<Month> => {
     try {
-        const requestData = getRequestData();
-        const monthResponse = await fetch(`${url}/lunarmonthinfo`,{
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'x-api-key': api_key
-            },
-            body: JSON.stringify(requestData)
-        });
-        if (!monthResponse.ok){
-            throw new Error(`HTTP error! status: ${monthResponse.status}`)
-        }
-
-        const monthResult = await monthResponse.json() as FreeAstrologyResponse;
-        const monthOutput = JSON.parse(monthResult.output) as MonthOutput;
-        console.log(monthOutput)
+         const monthResult = await fetchAstrologer({
+            path: "/lunarmonthinfo",
+            method: "POST",
+            body: getRequestData(),
+       });
+       const monthOutput = JSON.parse(monthResult) as MonthOutput;
 
         const month: Month = {
             lunarMonthName: monthOutput.lunar_month_name,
@@ -135,55 +107,40 @@ export const getMonth = async () => {
         return month;
     } catch (error) {
         console.error('Error fetching panchang data:', error);
+        throw error;
     }
 }
 
-export const getYog = async () => {
+export const getYog = async (): Promise<NameAndCompletion> => {
     try {
-        const requestData = getRequestData();
-        const yogResponse = await fetch(`${url}/yoga-durations`,{
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'x-api-key': api_key
-            },
-            body: JSON.stringify(requestData)    
+        const yogResult = await fetchAstrologer({
+            path: "/yoga-durations",
+            method: "POST",
+            body: getRequestData(),
         });
-        if (!yogResponse.ok){
-            throw new Error(`HTTP error! status: ${yogResponse.status}`)
-        }
-        const yogResult = await yogResponse.json() as FreeAstrologyResponse;
-        const yogOutput = JSON.parse(yogResult.output) as YogOutput;
-        console.log(yogOutput)
+        const yogResponse = JSON.parse(yogResult) as YogOutput;
 
-        const secondYogResponse = yogOutput["2"];
+       const yogOutput = yogResponse["2"];
 
         const yog: NameAndCompletion = {
-            name: secondYogResponse.name,
-            completion: new Date(secondYogResponse.completion)
+            name: yogOutput.name,
+            completion: new Date(yogOutput.completion)
         }
         return yog;
     } catch (error) {
         console.error('Error fetching panchang data:', error);
+        throw error;
     }
 }
 
-export const getSamvat = async () => {
+export const getSamvat = async (): Promise<Samvat> => {
     try {
-        const requestData = getRequestData();
-        const samvatResponse = await fetch(`${url}/samvatinfo`,{
+        const samvatResult = await fetchAstrologer({
+            path: '/samvatinfo',
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'x-api-key': api_key
-            },
-            body: JSON.stringify(requestData)
+            body: getRequestData(),
         });
-        if (!samvatResponse.ok){
-            throw new Error(`HTTP error! status: ${samvatResponse.status}`)
-        }
-        const samvatResult = await samvatResponse.json() as FreeAstrologyResponse;
-        const samvatOutput = JSON.parse(samvatResult.output) as SamvatOutput;
+        const samvatOutput = JSON.parse(samvatResult) as SamvatOutput
 
         const samvat: Samvat = {
             vikram: samvatOutput.vikram_chaitradi_number + ' ' +  samvatOutput.vikram_chaitradi_year_name,
@@ -193,57 +150,40 @@ export const getSamvat = async () => {
 
     } catch (error) {
         console.error('Error fetching panchang data:', error);
+        throw error;
     }
 }
 
-export const getNakshatra = async () => {
+export const getNakshatra = async (): Promise<NameAndCompletion> => {
     try {
-        const requestData = getRequestData();
-        const nakshatraResponse = await fetch(`${url}/nakshatra-durations`,{
+       const nakshatraResult = await fetchAstrologer({
+            path: '/nakshatra-durations',
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'x-api-key': api_key
-            },
-            body: JSON.stringify(requestData)
+            body: getRequestData(),
         });
-         if (!nakshatraResponse.ok){
-            throw new Error(`HTTP error! status: ${nakshatraResponse.status}`)
-        }
 
-        const nakshatraResult = await nakshatraResponse.json() as FreeAstrologyResponse;
-        console.log(nakshatraResult)
-        const nakshatraOutput = JSON.parse(nakshatraResult.output) as NakshatraOutput;
-        console.log(nakshatraOutput)
+        const nakshatraOutput = JSON.parse(nakshatraResult) as NakshatraOutput;
 
         const nakshatra: NameAndCompletion = {
             name: nakshatraOutput.name,
             completion: new Date(nakshatraOutput.ends_at),
         }
-
         return nakshatra;
     } catch (error) {
         console.error('Error fetching panchang data:', error);
+        throw error;
     }
 }
 
-export const getKaran = async () => {
+export const getKaran = async (): Promise<NameAndCompletion> => {
     try {
-        const requestData = getRequestData();
-        const karanResponse = await fetch(`${url}/karana-durations`,{
+        const karanResult = await fetchAstrologer({
+            path: '/karana-durations',
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'x-api-key': api_key
-            },
-            body: JSON.stringify(requestData)
+            body: getRequestData(),
         });
-         if (!karanResponse.ok){
-            throw new Error(`HTTP error! status: ${karanResponse.status}`)
-        }
 
-        const karanResult = await karanResponse.json() as FreeAstrologyResponse;
-        const karanOutput = JSON.parse(karanResult.output) as KaranOutput;
+        const karanOutput = JSON.parse(karanResult) as KaranOutput;
 
         const firstKaranResponse = karanOutput["1"];
 
@@ -251,9 +191,10 @@ export const getKaran = async () => {
             name: firstKaranResponse.name,
             completion: new Date(firstKaranResponse.completion)
         };
-        return karan
+        return karan;
 
     } catch (error) {
-         console.error('Error fetching panchang data:', error);
+        console.error('Error fetching panchang data:', error);
+        throw error;
     }
 }
