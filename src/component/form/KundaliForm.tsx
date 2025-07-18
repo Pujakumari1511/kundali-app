@@ -6,6 +6,8 @@ import { GenderField } from "./GenderField";
 import { Button } from "@/components/ui/button";
 import { BirthDetails } from "./BirthDetails";
 import { LocationField } from "./LocationField";
+import { useState } from "react";
+import { KundliModal } from "./KundliModalView";
 
 type FormData = {
   name: string;
@@ -17,18 +19,62 @@ type FormData = {
 };
 
 export const KundaliForm: React.FC = () => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [svgContent, setSvgContent] = useState('');
+  const [currentUserName, setCurrentUserName] = useState('');
   const methods = useForm<FormData>();
 
-  const onSubmit = (data: FormData) => {
-    console.log("Form Data:", data);
+  const handlePayButtonClick = async (formData: FormData) => {
+    try {
+      setIsLoading(true);
+      const response = await fetch('/api/kundli', {
+         method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+          }
+      });
+      const apiResponse = await response.json();
+      if (apiResponse.success && apiResponse.data?.output) {
+        setSvgContent(apiResponse.data.output);
+        setCurrentUserName(formData.name || 'User');
+        setIsModalOpen(true);  
+
+      } else {
+        console.error('Failed to get kundli data');
+        alert('Failed to generate kundli. Please try again.');
+      }
+    } catch (error) {
+        console.error('Error downloading kundli:', error);
+        alert('Error occurred while generating kundli. Please try again.');
+    } finally {
+      setIsLoading(false);
+    }
   };
+
+  const onSubmit = (data: FormData, e: any) => {
+    handlePayButtonClick(data);
+    methods.reset();
+  };
+
+   const onError = (errors: any) => {
+    // Show user which fields are missing
+    const missingFields = Object.keys(errors);
+    alert(`Please fill required fields: ${missingFields.join(', ')}`);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSvgContent('');
+    setCurrentUserName('');
+  }
 
   return (
     <div >
         <FormProvider {...methods}>
           <h3 className="text-[#FF9933] text-lg py-4">Fill the form to get your kundli</h3>
           <p className="text-xs pb-2">Name & Gender</p>
-            <form onSubmit={methods.handleSubmit(onSubmit)} className="text-xs [&_*]:text-xs">
+            <form onSubmit={methods.handleSubmit(onSubmit, onError)} className="text-xs [&_*]:text-xs">
                 <InputField
                   fieldId="name"
                   label="Name"
@@ -71,12 +117,18 @@ export const KundaliForm: React.FC = () => {
                       type="submit"
                       className="bg-[#FF9933] hover:bg-[none] text-white font-bold text-center w-full h-full py-3 rounded-none cursor-pointer"
                     >
-                      Pay
+                      {isLoading ? 'Generating...' : 'Pay'}
                     </Button>
                   </div>
                 </div>
             </form>  
       </FormProvider>
+      <KundliModal
+        isOpen={isModalOpen}
+        onClose={closeModal}
+        svgContent={svgContent}
+        userName={currentUserName}
+      />
     </div>
     
   );

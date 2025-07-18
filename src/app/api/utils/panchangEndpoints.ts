@@ -73,12 +73,11 @@ const getRequestData = (): RequestData => {
 
 export const getTithi = async(): Promise<NameAndCompletion> => {
     try {
-        const tithiResult = await fetchAstrologer({
+        const tithiOutput = await fetchAstrologer<TithiOutput>({
             path: "/tithi-durations",
             method: "POST",
             body: getRequestData(),
         });
-        const tithiOutput = JSON.parse(tithiResult) as TithiOutput;
 
         const tithi: NameAndCompletion = {
             name: tithiOutput.name,
@@ -93,12 +92,11 @@ export const getTithi = async(): Promise<NameAndCompletion> => {
 
 export const getMonth = async(): Promise<Month> => {
     try {
-         const monthResult = await fetchAstrologer({
+         const monthOutput = await fetchAstrologer<MonthOutput>({
             path: "/lunarmonthinfo",
             method: "POST",
             body: getRequestData(),
        });
-       const monthOutput = JSON.parse(monthResult) as MonthOutput;
 
         const month: Month = {
             lunarMonthName: monthOutput.lunar_month_name,
@@ -113,14 +111,12 @@ export const getMonth = async(): Promise<Month> => {
 
 export const getYog = async (): Promise<NameAndCompletion> => {
     try {
-        const yogResult = await fetchAstrologer({
+        const yogResponse = await fetchAstrologer<YogOutput>({
             path: "/yoga-durations",
             method: "POST",
             body: getRequestData(),
         });
-        const yogResponse = JSON.parse(yogResult) as YogOutput;
-
-       const yogOutput = yogResponse["2"];
+       const yogOutput = yogResponse["1"];
 
         const yog: NameAndCompletion = {
             name: yogOutput.name,
@@ -135,12 +131,11 @@ export const getYog = async (): Promise<NameAndCompletion> => {
 
 export const getSamvat = async (): Promise<Samvat> => {
     try {
-        const samvatResult = await fetchAstrologer({
+        const samvatOutput = await fetchAstrologer<SamvatOutput>({
             path: '/samvatinfo',
             method: 'POST',
             body: getRequestData(),
         });
-        const samvatOutput = JSON.parse(samvatResult) as SamvatOutput
 
         const samvat: Samvat = {
             vikram: samvatOutput.vikram_chaitradi_number + ' ' +  samvatOutput.vikram_chaitradi_year_name,
@@ -156,13 +151,11 @@ export const getSamvat = async (): Promise<Samvat> => {
 
 export const getNakshatra = async (): Promise<NameAndCompletion> => {
     try {
-       const nakshatraResult = await fetchAstrologer({
+       const nakshatraOutput = await fetchAstrologer<NakshatraOutput>({
             path: '/nakshatra-durations',
             method: 'POST',
             body: getRequestData(),
         });
-
-        const nakshatraOutput = JSON.parse(nakshatraResult) as NakshatraOutput;
 
         const nakshatra: NameAndCompletion = {
             name: nakshatraOutput.name,
@@ -177,13 +170,11 @@ export const getNakshatra = async (): Promise<NameAndCompletion> => {
 
 export const getKaran = async (): Promise<NameAndCompletion> => {
     try {
-        const karanResult = await fetchAstrologer({
+        const karanOutput = await fetchAstrologer<KaranOutput>({
             path: '/karana-durations',
             method: 'POST',
             body: getRequestData(),
         });
-
-        const karanOutput = JSON.parse(karanResult) as KaranOutput;
 
         const firstKaranResponse = karanOutput["1"];
 
