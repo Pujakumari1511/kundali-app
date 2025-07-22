@@ -1,14 +1,15 @@
 import { X, Download} from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { FormData } from "@/types/kundli";
 
 interface KundliModalProps {
   isOpen: boolean;
   onClose: () => void;
   svgContent: string;
-  userName: string;
+  formData?: FormData;
 }
 
-export const KundliModal = ({isOpen, onClose, svgContent, userName}: KundliModalProps) => {
+export const KundliModal = ({isOpen, onClose, svgContent, formData}: KundliModalProps) => {
   if (!isOpen) return null;
 
     const handleDownload = () => {
@@ -16,7 +17,7 @@ export const KundliModal = ({isOpen, onClose, svgContent, userName}: KundliModal
     const url = URL.createObjectURL(svgBlob);
     const link = document.createElement('a');
     link.href = url;
-    link.download = `${userName}-kundli-chart.svg`;
+    link.download = `${formData?.name || 'user'}-kundli-chart.svg`;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -37,7 +38,7 @@ export const KundliModal = ({isOpen, onClose, svgContent, userName}: KundliModal
         {/* Header */}
         <div className="flex justify-between items-center p-2 border-b">
           <h2 className="text-xl font-bold text-[#FF9933]">
-            {userName}'s Kundli Chart
+            {formData?.name}'s Kundli Chart
           </h2>
           <button
             onClick={onClose}
@@ -50,9 +51,15 @@ export const KundliModal = ({isOpen, onClose, svgContent, userName}: KundliModal
         {/* SVG Content */}
         <div className="p-2 grid grid-cols-5 bg-gray-50">
           <div className="col-span-2 p-10">
-            <p>Name: Aarna Kumari</p>
-            <p>DOB: 12.09.2024</p>
-            <p>Phone: 23456778</p>
+              <h2 className=" text-gray-800 mb-3 text-2xl">Personal Details</h2>
+            <p><b>Name:</b> {formData?.name || 'N/A'}</p>
+            <p><b>Phone:</b> {formData?.phone || 'N/A'}</p>
+            <p><b>Gender:</b> {formData?.gender || 'N/A'}</p>
+            <p><b>Birth Date:</b> {`${formData?.birthDay}/${formData?.birthMonth}/${formData?.birthYear} ` || 'N/A'}</p>
+            <p><b>Birth Time:</b> {formData?.birthHour && formData?.birthMinute && formData?.birthPeriod 
+            ? `${formData.birthHour}:${formData.birthMinute} ${formData.birthPeriod}` 
+            : 'N/A'}</p>
+            <p><b>Place:</b> {formData?.place || 'N/A'}</p>
           </div>
           <div className="col-span-3 border rounded-lg bg-white px-6 py-4 shadow-sm"
             dangerouslySetInnerHTML={{ __html: svgContent }}

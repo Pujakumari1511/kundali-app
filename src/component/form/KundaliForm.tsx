@@ -8,21 +8,14 @@ import { BirthDetails } from "./BirthDetails";
 import { LocationField } from "./LocationField";
 import { useState } from "react";
 import { KundliModal } from "./KundliModalView";
+import { KundliData, FormData } from "@/types/kundli";
 
-type FormData = {
-  name: string;
-  phone: string;
-  place: string;
-  gender: string;
-  birthDetails: string;
-  locationField: string;
-};
+
 
 export const KundaliForm: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [svgContent, setSvgContent] = useState('');
-  const [currentUserName, setCurrentUserName] = useState('');
+  const [kundliData, setKundliData] = useState<KundliData>();
   const methods = useForm<FormData>();
 
   const handlePayButtonClick = async (formData: FormData) => {
@@ -36,8 +29,11 @@ export const KundaliForm: React.FC = () => {
       });
       const apiResponse = await response.json();
       if (apiResponse.success && apiResponse.data?.output) {
-        setSvgContent(apiResponse.data.output);
-        setCurrentUserName(formData.name || 'User');
+        setKundliData({
+          formData: formData,
+          svgContent: apiResponse.data.output,
+          generatedAt: new Date()
+        });
         setIsModalOpen(true);  
 
       } else {
@@ -52,8 +48,16 @@ export const KundaliForm: React.FC = () => {
     }
   };
 
-  const onSubmit = (data: FormData, e: any) => {
-    handlePayButtonClick(data);
+  const onSubmit = (data: FormData) => {
+    console.log('Form data:', data);
+    const birthDetails = `${data.birthDay}/${data.birthMonth}/${data.birthYear}
+     at ${data.birthHour}:${data.birthMinute} ${data.birthPeriod}`;
+
+     const formDataWithBirthDetails = {
+      ...data,
+      birthDetails: birthDetails
+     };
+    handlePayButtonClick(formDataWithBirthDetails);
     methods.reset();
   };
 
@@ -65,8 +69,6 @@ export const KundaliForm: React.FC = () => {
 
   const closeModal = () => {
     setIsModalOpen(false);
-    setSvgContent('');
-    setCurrentUserName('');
   }
 
   return (
@@ -126,8 +128,8 @@ export const KundaliForm: React.FC = () => {
       <KundliModal
         isOpen={isModalOpen}
         onClose={closeModal}
-        svgContent={svgContent}
-        userName={currentUserName}
+        svgContent={kundliData?.svgContent || ''}
+        formData={kundliData?.formData}
       />
     </div>
     
