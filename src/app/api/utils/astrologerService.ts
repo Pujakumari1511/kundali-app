@@ -13,10 +13,10 @@ export interface StringResponse {
 
 interface FreeAstrologyResponse {
     statusCode: number;
-    output: string;
+    output: any;
 }
 
-export const fetchAstrologer = async (request: AstrologerRequest): Promise<string> => {
+export const fetchAstrologer = async <T>(request: AstrologerRequest): Promise<T> => {
     try {
         const response = await fetch(`${hostURL}${request.path}`,{
             method: request.method,
@@ -32,9 +32,20 @@ export const fetchAstrologer = async (request: AstrologerRequest): Promise<strin
             throw new Error(`HTTP error! status: ${response.status} for path: ${request.path} with body: ${JSON.stringify(responseBody)}`);
         }
         const output = (responseBody as FreeAstrologyResponse).output;
-        return output;
+        return parseOutput(output);
     } catch (error) {
         console.error('Error fetching astrologer data: ', error);
         throw new Error('Astrologer api error')
+    } finally {
+        await new Promise(resolve => setTimeout(resolve, 1000));
+    }
+}
+
+const parseOutput = <T>(output: any): T =>{
+    try {
+        return JSON.parse(output) as T;
+    } catch (error) {
+        console.error('Error parsing output:', error);
+        return output as T;
     }
 }

@@ -38,8 +38,6 @@ export const Panchang = () => {
         setError(null);
 
         try {
-           
-
             const response = await fetch('/api/panchang', {
                 method: 'GET',
                 headers: {
