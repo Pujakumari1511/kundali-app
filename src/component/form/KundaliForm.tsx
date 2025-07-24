@@ -5,10 +5,9 @@ import { InputField } from "./InputField";
 import { GenderField } from "./GenderField";
 import { Button } from "@/components/ui/button";
 import { BirthDetails } from "./BirthDetails";
-import { LocationField } from "./LocationField";
 import { useState } from "react";
 import { KundliModal } from "./KundliModalView";
-import { KundliData, FormData } from "@/types/kundli";
+import { KundliData, KundliFormData, KundliSaveData } from "@/types/kundli";
 
 
 
@@ -16,16 +15,17 @@ export const KundaliForm: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [kundliData, setKundliData] = useState<KundliData>();
-  const methods = useForm<FormData>();
+  const methods = useForm<KundliFormData>();
 
-  const handlePayButtonClick = async (formData: FormData) => {
+  const handlePayButtonClick = async (formData: KundliFormData) => {
     try {
       setIsLoading(true);
       const response = await fetch('/api/kundli', {
-         method: 'GET',
-            headers: {
-              'Content-Type': 'application/json',
-          }
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
       });
       const apiResponse = await response.json();
       if (apiResponse.success && apiResponse.data?.output) {
@@ -37,8 +37,8 @@ export const KundaliForm: React.FC = () => {
         setIsModalOpen(true);  
 
       } else {
-        console.error('Failed to get kundli data');
-        alert('Failed to generate kundli. Please try again.');
+          console.error('Failed to get kundli data');
+          alert('Failed to generate kundli. Please try again.');
       }
     } catch (error) {
         console.error('Error downloading kundli:', error);
@@ -48,9 +48,8 @@ export const KundaliForm: React.FC = () => {
     }
   };
 
-  const onSubmit = (data: FormData) => {
-    console.log('Form data:', data);
-    const birthDetails = `${data.birthDay}/${data.birthMonth}/${data.birthYear}
+  const onSubmit = (data: KundliFormData) => {
+    const birthDetails = `${data.birthDate}/${data.birthMonth}/${data.birthYear}
      at ${data.birthHour}:${data.birthMinute} ${data.birthPeriod}`;
 
      const formDataWithBirthDetails = {
@@ -98,15 +97,17 @@ export const KundaliForm: React.FC = () => {
                 <p className="text-[#000000] text-xs py-3">Birth Details</p>
                 <BirthDetails />
                 <InputField
-                  fieldId="place"
-                  label="Place"
+                  fieldId="city"
+                  label="City"
+                  placeholder="Type your birth city"
                   register={methods.register}
                 />
-                <div className="flex justify-center pb-3">
-                  <p><b>OR</b></p>
-                </div>
-                <LocationField label="Longitude" namePrefix="longitude" directions={['E', 'W']} maxDegrees={180} />
-                <LocationField label="Latitude" namePrefix="latitude" directions={['N', 'S']} maxDegrees={90} />
+                <InputField
+                  fieldId="state"
+                  label="State"
+                  placeholder="Type your birth state"
+                  register={methods.register}
+                />
                 <InputField fieldId="message" label="Comment" placeholder="Type message" register={methods.register} />
                 <div className="grid grid-cols-2 w-full mt-10">
                   <div className="bg-[#F1F1F1] flex flex-col justify-center items-start px-4">

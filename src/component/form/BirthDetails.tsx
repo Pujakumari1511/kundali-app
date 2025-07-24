@@ -12,19 +12,21 @@ const generateOptions = (start: number, end: number, pad = false) =>
 export const BirthDetails: React.FC = () => {
   const { register, setValue, watch } = useFormContext();
 
-  const birthDay = watch("birthDay");
+
+  const birthDate = watch("birthDate");
   const birthMonth = watch("birthMonth");
   const birthYear = watch("birthYear");
   const birthHour = watch("birthHour");
   const birthMinute = watch("birthMinute");
   const birthPeriod = watch("birthPeriod");
+  
 
   return (
     <div>
       <div className="grid grid-cols-3 gap-4 border border-gray-300 mb-3 rounded">
         <Label className="bg-[#F4E6CD80] col-span-1 text-gray-700 p-2">Date</Label>
         <div className="flex">
-          <Select onValueChange={(value) => setValue("birthDay", value)} value={birthDay}>
+          <Select onValueChange={(value) => setValue("birthDate", value)} value={birthDate}>
             <SelectTrigger className="w-16 border-none">
               <SelectValue placeholder="DD" />
             </SelectTrigger>
@@ -116,7 +118,7 @@ export const BirthDetails: React.FC = () => {
           </ToggleGroup>
         </div>
         {/* Hidden fields to register for validation */}
-        <input type="hidden" {...register("birthDay", { required: "Day is required" })} />
+        <input type="hidden" {...register("birthDate", { required: "Day is required" })} />
         <input type="hidden" {...register("birthMonth", { required: "Month is required" })} />
         <input type="hidden" {...register("birthYear", { required: "Year is required" })} />
         <input type="hidden" {...register("birthHour", { required: "Hour is required" })} />
