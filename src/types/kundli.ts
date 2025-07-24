@@ -20,24 +20,36 @@ export interface KundliApiResponse {
     success: boolean;
     data?: KundliOutput;
     error?: string;
+    savedId?: number;
 }
 
-export interface FormData {
+export interface KundliFormData {
   name: string;
   phone: string;
-  place: string;
+  city: string;
+  state: string;
   gender: string;
-  birthDay: string;
+  birthDate: string;
   birthMonth: string;
   birthYear: string;
   birthHour: string;
   birthMinute: string;
   birthPeriod: string;
-  locationField: string;
 }
 
 export interface KundliData {
-  formData: FormData;
+  formData: KundliFormData;
   svgContent: string;
   generatedAt: Date;
+}
+
+export interface KundliSaveData {
+  name: string;
+  phone: string;
+  gender: string;
+  birth_date: string;
+  birth_time: string;
+  city: string;
+  state: string;
+  kundli_image_url: string | null;
 }

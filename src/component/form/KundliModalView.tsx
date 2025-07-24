@@ -1,17 +1,16 @@
 import { X, Download} from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { FormData } from "@/types/kundli";
+import { KundliFormData } from "@/types/kundli";
 
 interface KundliModalProps {
   isOpen: boolean;
   onClose: () => void;
   svgContent: string;
-  formData?: FormData;
+  formData?: KundliFormData;
 }
 
 export const KundliModal = ({isOpen, onClose, svgContent, formData}: KundliModalProps) => {
   if (!isOpen) return null;
-
     const handleDownload = () => {
     const svgBlob = new Blob([svgContent], { type: 'image/svg+xml' });
     const url = URL.createObjectURL(svgBlob);
@@ -55,11 +54,12 @@ export const KundliModal = ({isOpen, onClose, svgContent, formData}: KundliModal
             <p><b>Name:</b> {formData?.name || 'N/A'}</p>
             <p><b>Phone:</b> {formData?.phone || 'N/A'}</p>
             <p><b>Gender:</b> {formData?.gender || 'N/A'}</p>
-            <p><b>Birth Date:</b> {`${formData?.birthDay}/${formData?.birthMonth}/${formData?.birthYear} ` || 'N/A'}</p>
+            <p><b>Birth Date:</b> {`${formData?.birthDate}/${formData?.birthMonth}/${formData?.birthYear} ` || 'N/A'}</p>
             <p><b>Birth Time:</b> {formData?.birthHour && formData?.birthMinute && formData?.birthPeriod 
             ? `${formData.birthHour}:${formData.birthMinute} ${formData.birthPeriod}` 
             : 'N/A'}</p>
-            <p><b>Place:</b> {formData?.place || 'N/A'}</p>
+            <p><b>City:</b> {formData?.city || 'N/A'}</p>
+            <p><b>State:</b> {formData?.state || 'N/A'}</p>
           </div>
           <div className="col-span-3 border rounded-lg bg-white px-6 py-4 shadow-sm"
             dangerouslySetInnerHTML={{ __html: svgContent }}
