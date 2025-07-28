@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { PanchangData } from "@/types/panchang";
+import { Button } from "@/components/ui/button";
 
 
 interface PanchangImgProps {
@@ -21,17 +22,20 @@ export const Panchang = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const [panchangData, setPanchangData] = useState<PanchangData>();
+    const [formattedDate, setFormattedDate] = useState("");
 
-
-    // current day, date and year
-    const now = new Date();
     const options: Intl.DateTimeFormatOptions = {
         weekday: 'long',
         year: 'numeric',
         month: 'long',
         day: 'numeric',
     };
-    const formattedDate = now.toLocaleDateString('en-US', options);
+
+    useEffect(() => {
+        if (typeof window !== undefined) {
+            setFormattedDate(new Date().toLocaleDateString('en-IN', options).toString());
+        }
+    }, [])
 
     const fetchPanchang = async () => {
         setLoading(true);
@@ -48,9 +52,12 @@ export const Panchang = () => {
             if (!response.ok) {
                 throw new Error('Failed to fetch panchang data')
             }
-            const data: PanchangData = await response.json();
-            setPanchangData(data);
-            console.log('Panchang data:', data);
+            const data = await response.json();
+            if (data.success) {
+                setPanchangData(data.data);
+            } else {
+                throw new Error(data.error || 'Failed to fetch panchang data');
+            }
         } catch (error) {
             setError(error instanceof Error ? error.message: 'An error occured')
         } finally {
@@ -68,12 +75,12 @@ export const Panchang = () => {
             <div className="bg-[#FFFFFF] p-4 rounded mb-8">
                 <div className="flex justify-between items-center">
                     <div >
-                        <h5>Aaj Ka Panchang</h5>
+                        <h5>Aaj Ka Panchangashbfhabf</h5>
                         <p className="text-sm">New Delhi, India</p>
                     </div>
-                    <button className="bg-[#FF9933] p-1 rounded text-sm text-[#FFFFFF]">
+                    <Button className="bg-[#FF9933] p-1 rounded text-sm text-[#FFFFFF]">
                         Detailed Panchang
-                    </button>   
+                    </Button>   
                 </div>
                 {error && (
                     <div className="text-red-500 text-sm mt-2">
@@ -81,7 +88,14 @@ export const Panchang = () => {
                     </div>
                 )}
 
-                <div className="grid grid-cols-3 gap-3 items-center">
+                {loading ? (
+                    <div className="text-center py-8">
+                    <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-[#FF9933] mx-auto"></div>
+                    <p className="mt-2 text-sm text-gray-500">Fetching latest panchang data...</p>
+                </div>
+                ) : (
+                    <>
+                    <div className="grid grid-cols-3 gap-3 items-center">
                     <hr className="border-t-1 border-[#43557B] w-25 md:w-45" />
                     <p className="text-sm font-medium text-[#43557B] text-center">{formattedDate}</p>
                     <hr className="border-t-1 border-[#43557B] w-25 md:w-45" />
@@ -122,7 +136,7 @@ export const Panchang = () => {
                         <div>
                             <h5>Month</h5>
                             <p>Amanta: <b>{panchangData?.month?.lunarMonthName || 'Loading...'}</b></p>
-                            <p>Purnimanta: <b>{panchangData?.month?.lunarMonthFullName || 'Loading'}</b></p>
+                            <p>Purnimanta: <b>{panchangData?.month?.lunarMonthFullName || 'Loading...'}</b></p>
                             <hr className="border-t-1 border-gray-300 w-30 md:w-63 my-2" />
                         </div>
                         <div>
@@ -153,8 +167,9 @@ export const Panchang = () => {
                         </div>
                     </div>
                 </div>
-            </div>   
-            
+                </>
+                )}  
+            </div>      
         </div>
     )
 }

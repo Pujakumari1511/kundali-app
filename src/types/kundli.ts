@@ -43,13 +43,13 @@ export interface KundliData {
   generatedAt: Date;
 }
 
-export interface KundliSaveData {
-  name: string;
-  phone: string;
-  gender: string;
-  birth_date: string;
-  birth_time: string;
-  city: string;
-  state: string;
-  kundli_image_url: string | null;
-}
+// export interface KundliSaveData {
+//   name: string;
+//   phone: string;
+//   gender: string;
+//   birth_date: string;
+//   birth_time: string;
+//   city: string;
+//   state: string;
+//   kundli_image_url: string | null;
+// }

@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { BirthDetails } from "./BirthDetails";
 import { useState } from "react";
 import { KundliModal } from "./KundliModalView";
-import { KundliData, KundliFormData, KundliSaveData } from "@/types/kundli";
+import { KundliData, KundliFormData } from "@/types/kundli";
 
 
 

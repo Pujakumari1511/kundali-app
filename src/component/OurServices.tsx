@@ -1,3 +1,5 @@
+import { Button } from "@/components/ui/button";
+
 interface ServiceProp {
     name: string;
     imgSrc: string;
@@ -20,7 +22,7 @@ const Service = ({name, imgSrc, altImg }: ServiceProp) => {
                 </p>
             </div>
             <div className="bg-[#FF9933] flex justify-center w-full p-2 rounded text-sm text-[#FFFFFF]">
-                <button>Enquire Now</button>
+                <Button variant="ghost">Enquire Now</Button>
             </div>
         </div>
     )
@@ -98,7 +100,7 @@ export const OurServices = () => {
                 </div>
             </div>
             <div className="flex justify-center pb-10 md:pb-0">
-                <button className="bg-[#FF9933] px-10 py-2 rounded mt-10">View All</button>
+                <Button className="bg-[#FF9933] px-10 py-2 rounded mt-10">View All</Button>
             </div>
         </div>
     )
