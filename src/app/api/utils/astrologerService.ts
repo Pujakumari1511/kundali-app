@@ -4,7 +4,7 @@ const hostURL = "https://json.freeastrologyapi.com";
 export interface AstrologerRequest {
     path: string;
     method: "GET" | "POST" | "DELETE" | "PUT"
-    body?: any
+    body?: object;
 }
 
 export interface StringResponse {
@@ -13,7 +13,7 @@ export interface StringResponse {
 
 interface FreeAstrologyResponse {
     statusCode: number;
-    output: any;
+    output: string;
 }
 
 export const fetchAstrologer = async <T>(request: AstrologerRequest): Promise<T> => {
@@ -41,7 +41,7 @@ export const fetchAstrologer = async <T>(request: AstrologerRequest): Promise<T>
     }
 }
 
-const parseOutput = <T>(output: any): T =>{
+const parseOutput = <T>(output: string): T =>{
     try {
         return JSON.parse(output) as T;
     } catch (error) {

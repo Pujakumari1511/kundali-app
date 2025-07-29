@@ -3,16 +3,21 @@ import { NextResponse } from "next/server";
 import { getYog, getSamvat, getKaran, getTithi, getMonth, getNakshatra} from "../utils/panchangEndpoints";
 import { PanchangData } from "@/types/panchang";
 import { pool } from "@/db/mysql";
+import { RowDataPacket } from 'mysql2';
 
+
+interface PanchangRow extends RowDataPacket {
+    panchangData: string;
+}
 
 export async function GET() {
     try {
         const currentDate = new Date().toISOString().split('T')[0];
 
-        const [existingRows] = await pool.query(
+        const [existingRows] = await pool.query<PanchangRow[]>(
             'SELECT panchangData FROM panchang WHERE date = ?',
             [currentDate]
-        ) as any[];
+        );
 
         if (existingRows.length > 0) {
             const record = existingRows[0];

@@ -1,5 +1,7 @@
 "use client";
 
+import Image from "next/image";
+
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { useState } from "react";
@@ -24,7 +26,13 @@ const MobileViewHeader = () => {
             <div className=" bg-white z-50 shadow-md">
                 <div className="flex justify-between items-center p-4">
                     <div>
-                        <img className="size-15" src="/assets/fefdd7aaf551a3a03f9a2cf595d1fda42a39f963.png" alt="Vedic Jyotishe Logo" />
+                        <Image
+                            className="size-15"
+                            src="/assets/fefdd7aaf551a3a03f9a2cf595d1fda42a39f963.png" 
+                            alt="Vedic Jyotishe Logo"
+                            width={60}
+                            height={60}
+                            />
                     </div>
                     <div>
                         <Button 
@@ -122,7 +130,13 @@ const TabAndDeskTopHeader = () => {
             
             <div className="flex bg-[#FFFFFFE5] h-40 w-full items-center gap-x-4 mt-6 text-lg border-t  justify-between px-8" >
                 <div>
-                    <img className="size-45 mt-3" src="/assets/fefdd7aaf551a3a03f9a2cf595d1fda42a39f963.png" alt="Vedic Jyotishe Logo" />
+                    <Image
+                        className="size-65 mt-3"
+                        src="/assets/fefdd7aaf551a3a03f9a2cf595d1fda42a39f963.png" 
+                        alt="Vedic Jyotishe Logo"
+                        width={140}
+                        height={140}
+                        />
                 </div>
                 <div className="flex items-center gap-x-4 text-[#43557B]">  
                     <Link href="/">Home</Link>

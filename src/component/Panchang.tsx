@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { PanchangData } from "@/types/panchang";
 import { Button } from "@/components/ui/button";
+import Image from "next/image";
 
 
 interface PanchangImgProps {
@@ -11,7 +12,12 @@ interface PanchangImgProps {
 const PanchangImg = ({image, time, altImg}: PanchangImgProps) => {
     return (
         <div className="p-4 text-[#FFFFFF] text-center">
-            <img className="w-full h-18" src={image} alt={altImg} />
+            <Image 
+                src={image} 
+                alt={altImg} 
+                width={100} 
+                height={48}
+                />
             <p className="pt-2">{time}</p>
         </div>
     )
@@ -24,15 +30,14 @@ export const Panchang = () => {
     const [panchangData, setPanchangData] = useState<PanchangData>();
     const [formattedDate, setFormattedDate] = useState("");
 
-    const options: Intl.DateTimeFormatOptions = {
-        weekday: 'long',
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-    };
-
     useEffect(() => {
         if (typeof window !== undefined) {
+            const options: Intl.DateTimeFormatOptions = {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+            };
             setFormattedDate(new Date().toLocaleDateString('en-IN', options).toString());
         }
     }, [])
@@ -75,7 +80,7 @@ export const Panchang = () => {
             <div className="bg-[#FFFFFF] p-4 rounded mb-8">
                 <div className="flex justify-between items-center">
                     <div >
-                        <h5>Aaj Ka Panchangashbfhabf</h5>
+                        <h5>Aaj Ka Panchang</h5>
                         <p className="text-sm">New Delhi, India</p>
                     </div>
                     <Button className="bg-[#FF9933] p-1 rounded text-sm text-[#FFFFFF]">
@@ -103,28 +108,28 @@ export const Panchang = () => {
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-6 py-4">
                     <div className="bg-[#FF9933] rounded">
                         <PanchangImg
-                            image="/assets/orangePanchangImg.png"
-                            altImg="orangePanchangImg"
+                            image="/assets/sunrisePanchangImg.png"
+                            altImg="Sunrise Image"
                             time="6.18.31" 
                         />
                     </div>
                     <div className="bg-[#FF9933] rounded">
                         <PanchangImg
-                            image="/assets/orangePanchangImg.png"
-                            altImg="orangePanchangImg"
+                            image="/assets/sunsetPanchangImage.png"
+                            altImg="Sunset Image"
                             time="17.57.43" 
                         />
                     </div>
                     <div className="bg-[#1E3A8A] rounded">
                         <PanchangImg
-                            image="/assets/bluePanchangImg.png"
+                            image="/assets/moonrisePanchangImg.png"
                             altImg="BluePanchangImg"
                             time="12.10.28" 
                         />
                     </div>
                     <div  className="bg-[#1E3A8A] rounded">
                         <PanchangImg
-                            image="/assets/bluePanchangImg.png"
+                            image="/assets/moonsetPanchangImg.png"
                             altImg="BluePanchangImg"
                             time="22.13.7" 
                         />

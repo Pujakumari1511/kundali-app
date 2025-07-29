@@ -18,8 +18,6 @@ export const kundli = async (kundaliRequestData: KundliRequestData): Promise<Kun
             throw new Error(`HTTP error! status: ${getKundliImage.status}`);
         }
         const response = await getKundliImage.json();
-
-        console.log('API Response:', response);
         const kundliResult: KundliOutput = {
             statusCode: response.statusCode,
             output: response.output
