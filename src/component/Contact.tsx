@@ -1,4 +1,5 @@
-import { ContactForm } from "./form/ContactForm"
+import { ContactForm } from "./form/ContactForm";
+import Image from "next/image";
 
 type BoxesProps = {
     icon: string;
@@ -11,7 +12,12 @@ const Boxex = ({icon, info1, info2}: BoxesProps) => {
         <div className="w-full max-w-80 mx-auto">
             <div className="bg-[#FF9933] h-60 w-full rounded-2xl text-white">
                 <div className="flex justify-center p-5 pt-10">
-                    <img src={icon} alt="" />
+                    <Image 
+                        src={icon} 
+                        alt="" 
+                        width={40}
+                        height={40}
+                        />
                 </div>
                 <p className="flex justify-center text-center px-10">{info1}</p>
                 <p className="flex justify-center text-center px-10">{info2}</p>
@@ -50,7 +56,12 @@ export const Contact = () => {
                 <div id="contactpage" className="bg-secondary border border-[#FF9933] grid grid-cols-1 lg:grid-cols-2 gap-8 px-6 sm:px-15 pb-20 pt-10 rounded relative">
                     <div>
                         <div className="mb-6">
-                            <img src="/assets/xImage.png" alt="X" />
+                            <Image 
+                                src="/assets/xImage.png" 
+                                alt="X" 
+                                width={20}
+                                height={20}
+                                />
                         </div>
                         <h3 className="text-3xl sm:text-4xl pb-5">Get In Touch</h3>
                         <p className="pb-5">
@@ -61,7 +72,7 @@ export const Contact = () => {
 
                         <p className="pb-5">
                             This insight can be invaluable when making important life decisions, 
-                            whether you're selecting the right educational field, choosing a 
+                            whether you&apos;re selecting the right educational field, choosing a 
                             career path, or finding a compatible life partner. It also helps 
                             you prepare for challenging periods and make the most of favorable 
                             times in specific areas of your life.

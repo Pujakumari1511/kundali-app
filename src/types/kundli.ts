@@ -35,21 +35,11 @@ export interface KundliFormData {
   birthHour: string;
   birthMinute: string;
   birthPeriod: string;
+  message?: string;
 }
 
 export interface KundliData {
   formData: KundliFormData;
   svgContent: string;
   generatedAt: Date;
-}
-
-export interface KundliSaveData {
-  name: string;
-  phone: string;
-  gender: string;
-  birth_date: string;
-  birth_time: string;
-  city: string;
-  state: string;
-  kundli_image_url: string | null;
 }

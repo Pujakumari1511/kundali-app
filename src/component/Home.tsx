@@ -3,17 +3,23 @@ import { NewsArticles } from "./NewsArticles"
 import { OurServices } from "./OurServices"
 import { Panchang } from "./Panchang"
 import { SocialMedia } from "./SocialMedia"
+import Image from "next/image";
 
 
 export const Home = () => {
     return (
         <div className="bg-[#FAE6B8] pt-1">
             <div className="bg-[#000080] flex flex-col items-center justify-center">
-                <div className="h-70 w-80 flex items-center justify-center">
-                    <img src="/assets/ganesh.png" alt="Ganesh" />
+                <div className="my-10 flex items-center justify-center">
+                    <Image
+                        src="/assets/ganesh.png" 
+                        alt="Ganesh"
+                        width={350}
+                        height={500}
+                        />
                 </div>
                 <div>
-                    <p className="text-[#FF9933] text-sm md:text-2xl text-center px-20 md:px-80 pb-15">
+                    <p className="text-[#FF9933] font-bold text-4xl md:text-3xl text-center px-20 md:px-70 pb-15">
                         ॐ गन गणपतए नमो नमः श्री सिद्धि विनायक नमो
                         नमः अष्टविनायकनमो नमः गणपति बाप्पा मोरया |
                     </p>

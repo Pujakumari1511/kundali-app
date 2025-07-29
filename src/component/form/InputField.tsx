@@ -1,17 +1,20 @@
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import { FieldError, UseFormRegister } from "react-hook-form";
+import { FieldError, UseFormRegister, FieldValues } from "react-hook-form";
 
-interface InputFieldProps {
-  fieldId: string;
+
+import { Path } from "react-hook-form";
+
+interface InputFieldProps<T extends FieldValues> {
+  fieldId: Path<T>;
   label: string;
   required?: string;
-  register: UseFormRegister<any>;
+  register: UseFormRegister<T>;
   error?: FieldError;
   placeholder?: string;
 }
 
-export const InputField = ({ fieldId, label, required, register, error, placeholder }: InputFieldProps) => (
+export const InputField = <T extends FieldValues>({ fieldId, label, required, register, error, placeholder }: InputFieldProps<T>) => (
   <div>
     {error && <p className="text-red-500 text-sm">{error.message}</p>}
     <div className={`grid grid-cols-3 gap-4 mb-3 rounded border ${error ? 'border-red-500' : 'border-gray-300'}`}>

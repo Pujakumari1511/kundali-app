@@ -1,8 +1,6 @@
-
 export interface Samvat {
     vikram: string;
     saka: string
-
 }
 
 export interface Month {
@@ -14,8 +12,6 @@ export interface NameAndCompletion {
     name: string;
     completion: Date;
 }
-
-
 
 export interface PanchangData {
     tithi?: NameAndCompletion;

@@ -1,5 +1,7 @@
 "use client";
 
+import Image from "next/image";
+
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { useState } from "react";
@@ -12,20 +14,25 @@ const MobileViewHeader = () => {
             {/* Contact Info Section */}   
             <div className="py-1 text-[#43557B] text-xs text-center" role="none">
                 <p >Talk to Astrologers: +000 123 456789</p>
-                <div className="flex gap-1 justify-center">
+                <div>
                     <p>info@example.com</p>
-                    <p>|</p>
                     <p>Follow us on</p>
-                    <button>Fb</button>
-                    <button>In</button>
-                    <button>Tw</button>
+                    <Button variant="ghost">Fb</Button>
+                    <Button variant="ghost">In</Button>
+                    <Button variant="ghost">Tw</Button>
                 </div>
             </div>
             </header>
             <div className=" bg-white z-50 shadow-md">
                 <div className="flex justify-between items-center p-4">
                     <div>
-                        <img className="size-15" src="/assets/fefdd7aaf551a3a03f9a2cf595d1fda42a39f963.png" alt="Vedic Jyotishe Logo" />
+                        <Image
+                            className="size-15"
+                            src="/assets/fefdd7aaf551a3a03f9a2cf595d1fda42a39f963.png" 
+                            alt="Vedic Jyotishe Logo"
+                            width={60}
+                            height={60}
+                            />
                     </div>
                     <div>
                         <Button 
@@ -90,12 +97,12 @@ const MobileViewHeader = () => {
                             
                             {/* Chat Now Button Section */}
                             <div className="py-1" role="none">
-                                <button 
+                                <Button 
                                     onClick={() => setIsMenuOpen(false)}
                                     className="block px-4 py-2 text-left text-sm text-white hover:bg-orange-500 bg-orange-400 rounded-md mx-2 my-1"
                                 >
                                     CHAT NOW
-                                </button>
+                                </Button>
                             </div>
                         </div>
                         )}
@@ -115,15 +122,21 @@ const TabAndDeskTopHeader = () => {
                     <p>info@example.com</p>
                     <p className="px-2">|</p>
                     <p>Follow us on</p>
-                    <button>Fb</button>
-                    <button>In</button>
-                    <button>Tw</button>
+                    <Button variant="ghost">Fb</Button>
+                    <Button variant="ghost">In</Button>
+                    <Button variant="ghost">Tw</Button>
                 </div>
             </div>
             
             <div className="flex bg-[#FFFFFFE5] h-40 w-full items-center gap-x-4 mt-6 text-lg border-t  justify-between px-8" >
                 <div>
-                    <img className="size-45 mt-3" src="/assets/fefdd7aaf551a3a03f9a2cf595d1fda42a39f963.png" alt="Vedic Jyotishe Logo" />
+                    <Image
+                        className="size-65 mt-3"
+                        src="/assets/fefdd7aaf551a3a03f9a2cf595d1fda42a39f963.png" 
+                        alt="Vedic Jyotishe Logo"
+                        width={140}
+                        height={140}
+                        />
                 </div>
                 <div className="flex items-center gap-x-4 text-[#43557B]">  
                     <Link href="/">Home</Link>
@@ -133,9 +146,9 @@ const TabAndDeskTopHeader = () => {
                     <Link href="/contact">Contact</Link>
                 </div>
                 <div className="bg-orange-400 rounded-3xl text-white p-2 px-4 text-md text-base">
-                    <button>
+                    <Button variant="ghost">
                         CHAT NOW
-                    </button>
+                    </Button>
                 </div>
             </div>
             <hr className="w-full border-t border-gray-200" />

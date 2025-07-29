@@ -37,7 +37,7 @@ export const KundliModal = ({isOpen, onClose, svgContent, formData}: KundliModal
         {/* Header */}
         <div className="flex justify-between items-center p-2 border-b">
           <h2 className="text-xl font-bold text-[#FF9933]">
-            {formData?.name}'s Kundli Chart
+            {formData?.name}&apos;s Kundli Chart
           </h2>
           <button
             onClick={onClose}

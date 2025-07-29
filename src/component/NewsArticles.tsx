@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 interface NewsProps {
     headerText: string;
     newsImg: string;
@@ -10,7 +12,12 @@ const News = ({headerText, newsImg, newsTopic, newsDetails, newsLink}: NewsProps
     return (
          <div className="p-4 bg-[#FFFFFF] rounded">
             <h1 className="text-xl py-1"><b>{headerText}</b></h1>
-            <img src={newsImg} alt="News Image" />
+            <Image 
+                src={newsImg} 
+                alt="News Image"
+                height={300}
+                width={400} 
+                />
             <h4 className="text-m">{newsTopic}</h4>
             <p className="text-xs">{newsDetails}</p>
                 <h5  className="text-blue-600 underline pt-4">
@@ -29,7 +36,7 @@ export const NewsArticles = () => {
                 <div className="p-4 bg-[#FFFFFF] rounded">
                     <News 
                         headerText="What's the news?"
-                        newsImg="assets/newsImage.png"
+                        newsImg="/assets/newsImage.png"
                         newsTopic="500-Coconut Vel Powers 6-Day Muruga Powertime"
                         newsDetails=" Join our Grand 7-Day Invocation of Muruga ad His 
                                 Divine Cosmic Weapon Vel featuring a Grand"
@@ -39,7 +46,7 @@ export const NewsArticles = () => {
                 <div className="p-4 bg-[#FFFFFF] rounded">
                     <News 
                         headerText="What's the news?"
-                        newsImg="assets/newsImage.png"
+                        newsImg="/assets/newsImage.png"
                         newsTopic="500-Coconut Vel Powers 6-Day Muruga Powertime"
                         newsDetails=" Join our Grand 7-Day Invocation of Muruga ad His 
                                 Divine Cosmic Weapon Vel featuring a Grand"

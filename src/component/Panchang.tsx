@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { PanchangData } from "@/types/panchang";
+import { Button } from "@/components/ui/button";
+import Image from "next/image";
 
 
 interface PanchangImgProps {
@@ -10,7 +12,12 @@ interface PanchangImgProps {
 const PanchangImg = ({image, time, altImg}: PanchangImgProps) => {
     return (
         <div className="p-4 text-[#FFFFFF] text-center">
-            <img className="w-full h-18" src={image} alt={altImg} />
+            <Image 
+                src={image} 
+                alt={altImg} 
+                width={100} 
+                height={48}
+                />
             <p className="pt-2">{time}</p>
         </div>
     )
@@ -21,17 +28,19 @@ export const Panchang = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const [panchangData, setPanchangData] = useState<PanchangData>();
+    const [formattedDate, setFormattedDate] = useState("");
 
-
-    // current day, date and year
-    const now = new Date();
-    const options: Intl.DateTimeFormatOptions = {
-        weekday: 'long',
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-    };
-    const formattedDate = now.toLocaleDateString('en-US', options);
+    useEffect(() => {
+        if (typeof window !== undefined) {
+            const options: Intl.DateTimeFormatOptions = {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+            };
+            setFormattedDate(new Date().toLocaleDateString('en-IN', options).toString());
+        }
+    }, [])
 
     const fetchPanchang = async () => {
         setLoading(true);
@@ -48,9 +57,12 @@ export const Panchang = () => {
             if (!response.ok) {
                 throw new Error('Failed to fetch panchang data')
             }
-            const data: PanchangData = await response.json();
-            setPanchangData(data);
-            console.log('Panchang data:', data);
+            const data = await response.json();
+            if (data.success) {
+                setPanchangData(data.data);
+            } else {
+                throw new Error(data.error || 'Failed to fetch panchang data');
+            }
         } catch (error) {
             setError(error instanceof Error ? error.message: 'An error occured')
         } finally {
@@ -71,9 +83,9 @@ export const Panchang = () => {
                         <h5>Aaj Ka Panchang</h5>
                         <p className="text-sm">New Delhi, India</p>
                     </div>
-                    <button className="bg-[#FF9933] p-1 rounded text-sm text-[#FFFFFF]">
+                    <Button className="bg-[#FF9933] p-1 rounded text-sm text-[#FFFFFF]">
                         Detailed Panchang
-                    </button>   
+                    </Button>   
                 </div>
                 {error && (
                     <div className="text-red-500 text-sm mt-2">
@@ -81,7 +93,14 @@ export const Panchang = () => {
                     </div>
                 )}
 
-                <div className="grid grid-cols-3 gap-3 items-center">
+                {loading ? (
+                    <div className="text-center py-8">
+                    <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-[#FF9933] mx-auto"></div>
+                    <p className="mt-2 text-sm text-gray-500">Fetching latest panchang data...</p>
+                </div>
+                ) : (
+                    <>
+                    <div className="grid grid-cols-3 gap-3 items-center">
                     <hr className="border-t-1 border-[#43557B] w-25 md:w-45" />
                     <p className="text-sm font-medium text-[#43557B] text-center">{formattedDate}</p>
                     <hr className="border-t-1 border-[#43557B] w-25 md:w-45" />
@@ -89,28 +108,28 @@ export const Panchang = () => {
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-6 py-4">
                     <div className="bg-[#FF9933] rounded">
                         <PanchangImg
-                            image="/assets/orangePanchangImg.png"
-                            altImg="orangePanchangImg"
+                            image="/assets/sunrisePanchangImg.png"
+                            altImg="Sunrise Image"
                             time="6.18.31" 
                         />
                     </div>
                     <div className="bg-[#FF9933] rounded">
                         <PanchangImg
-                            image="/assets/orangePanchangImg.png"
-                            altImg="orangePanchangImg"
+                            image="/assets/sunsetPanchangImage.png"
+                            altImg="Sunset Image"
                             time="17.57.43" 
                         />
                     </div>
                     <div className="bg-[#1E3A8A] rounded">
                         <PanchangImg
-                            image="/assets/bluePanchangImg.png"
+                            image="/assets/moonrisePanchangImg.png"
                             altImg="BluePanchangImg"
                             time="12.10.28" 
                         />
                     </div>
                     <div  className="bg-[#1E3A8A] rounded">
                         <PanchangImg
-                            image="/assets/bluePanchangImg.png"
+                            image="/assets/moonsetPanchangImg.png"
                             altImg="BluePanchangImg"
                             time="22.13.7" 
                         />
@@ -122,7 +141,7 @@ export const Panchang = () => {
                         <div>
                             <h5>Month</h5>
                             <p>Amanta: <b>{panchangData?.month?.lunarMonthName || 'Loading...'}</b></p>
-                            <p>Purnimanta: <b>{panchangData?.month?.lunarMonthFullName || 'Loading'}</b></p>
+                            <p>Purnimanta: <b>{panchangData?.month?.lunarMonthFullName || 'Loading...'}</b></p>
                             <hr className="border-t-1 border-gray-300 w-30 md:w-63 my-2" />
                         </div>
                         <div>
@@ -153,8 +172,9 @@ export const Panchang = () => {
                         </div>
                     </div>
                 </div>
-            </div>   
-            
+                </>
+                )}  
+            </div>      
         </div>
     )
 }

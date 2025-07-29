@@ -1,13 +1,13 @@
 "use client";
 
-import { useForm, FormProvider } from "react-hook-form";
+import { useForm, FormProvider, FieldErrors } from "react-hook-form";
 import { InputField } from "./InputField";
 import { GenderField } from "./GenderField";
 import { Button } from "@/components/ui/button";
 import { BirthDetails } from "./BirthDetails";
 import { useState } from "react";
 import { KundliModal } from "./KundliModalView";
-import { KundliData, KundliFormData, KundliSaveData } from "@/types/kundli";
+import { KundliData, KundliFormData } from "@/types/kundli";
 
 
 
@@ -60,7 +60,7 @@ export const KundaliForm: React.FC = () => {
     methods.reset();
   };
 
-   const onError = (errors: any) => {
+   const onError = (errors: FieldErrors<KundliFormData>) => {
     // Show user which fields are missing
     const missingFields = Object.keys(errors);
     alert(`Please fill required fields: ${missingFields.join(', ')}`);
@@ -107,6 +107,7 @@ export const KundaliForm: React.FC = () => {
                   label="State"
                   placeholder="Type your birth state"
                   register={methods.register}
+                  
                 />
                 <InputField fieldId="message" label="Comment" placeholder="Type message" register={methods.register} />
                 <div className="grid grid-cols-2 w-full mt-10">

@@ -3,6 +3,7 @@ import instaIcon from '../../public/assets/instaIcon.png';
 import youtubeIcon from '../../public/assets/youtube.png';
 import twitterIcon from '../../public/assets/twitter.png';
 import type { StaticImageData } from 'next/image';
+import Image from "next/image";
 
 
 const socialMediaJson = {
@@ -33,23 +34,31 @@ interface SocialMediaDetailProps {
 const SocialMediaDetails = ({image, altImg, headerText, paraText, socialMediaIcon, playIcon}: SocialMediaDetailProps) => {
     return (
         <div>
-            <div className="h-48 relative pb-4">
-                <img src={image} alt={altImg} className="w-full h-full object-cover" />
-                <img
+            <div className="relative pb-4">
+                <Image
+                  src={image} 
+                  alt={altImg} 
+                  className="w-full h-full object-cover" 
+                  height={120}
+                  width={100}
+                  />
+                <Image
                     src={playIcon}
                     alt="play button"
                     className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+                    height={30}
+                    width={30}
                 />
             </div>
             <h4>{headerText}</h4>
             <div className="text-xs grid grid-cols-4 gap-12 py-2">
                 <p className="col-span-3">{paraText}</p>
-                <img
+                <Image
                     src={typeof socialMediaIcon === 'string' ? socialMediaIcon : socialMediaIcon.src}
                     alt="social media icon"
-                    className="h-8 w-8"
+                    height={35}
+                    width={35}
                     />
-                {/* <img src={typeof socialMediaIcon} alt="Instagram icon" className="h-8 w-8 " /> */}
             </div>  
         </div>
     )
