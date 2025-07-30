@@ -13,7 +13,7 @@ export interface StringResponse {
 
 interface FreeAstrologyResponse {
     statusCode: number;
-    output: string;
+    output: string | object;
 }
 
 export const fetchAstrologer = async <T>(request: AstrologerRequest): Promise<T> => {
@@ -41,9 +41,12 @@ export const fetchAstrologer = async <T>(request: AstrologerRequest): Promise<T>
     }
 }
 
-const parseOutput = <T>(output: string): T =>{
+const parseOutput = <T>(output: string | object): T =>{
     try {
-        return JSON.parse(output) as T;
+       if (typeof output === "string") {
+            return JSON.parse(output) as T;
+        }
+        return output as T;
     } catch (error) {
         console.error('Error parsing output:', error);
         return output as T;

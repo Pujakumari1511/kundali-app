@@ -8,8 +8,8 @@ export const CustomerFeedback = () => {
                 <Image 
                     src="/assets/xImage.png" 
                     alt="X" 
-                    width={5}
-                    height={5}
+                    width={305}
+                    height={305}
                     />
             </div>
             <h1 className="text-lg md:text-3xl text-center mt-2 mb-6">Our Customer Thoughts</h1>

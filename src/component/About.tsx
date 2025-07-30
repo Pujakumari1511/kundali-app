@@ -9,8 +9,8 @@ export const About = () => {
                 <Image 
                     src="/assets/xImage.png" 
                     alt="X" 
-                    width={20}
-                    height={20}
+                    width={300}
+                    height={300}
                     />
             </div>
             <h3 className="text-3xl flex justify-center pb-8">About Vedic Astrology</h3>
