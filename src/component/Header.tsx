@@ -118,9 +118,9 @@ const TabAndDeskTopHeader = () => {
         <header>
             <div className="flex justify-between items-center text-[#43557B] text-sm pt-5 bg-white h-5 w-full px-15">
                 <p>Talk to Astrologers: +000 123 456789</p>
-                <div className="flex gap-6">
+                <div className="flex items-center gap-6">
                     <p>info@example.com</p>
-                    <p className="px-2">|</p>
+                    <span className="px-2">|</span>
                     <p>Follow us on</p>
                     <Button variant="ghost">Fb</Button>
                     <Button variant="ghost">In</Button>
