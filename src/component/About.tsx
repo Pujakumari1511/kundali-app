@@ -14,7 +14,7 @@ export const About = () => {
                     />
             </div>
             <h3 className="text-3xl flex justify-center pb-8">About Vedic Astrology</h3>
-            <div className="grid grid-cols1 md:grid-cols-5 pb-10 px-15">
+            <div className="grid grid-cols-1 md:grid-cols-5 pb-10 px-15">
                 <div className="col-span-1 md:col-span-2">
                     <Image 
                     className="h-30 sm:h-100 w-60 sm:w-100" 

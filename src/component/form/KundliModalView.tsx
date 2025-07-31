@@ -48,9 +48,9 @@ export const KundliModal = ({isOpen, onClose, svgContent, formData}: KundliModal
         </div>
 
         {/* SVG Content */}
-        <div className="p-2 grid grid-cols-5 bg-gray-50">
+        <div className="p-2 flex flex-col md:grid md:grid-cols-5 bg-gray-50">
           <div className="col-span-2 p-10">
-              <h2 className=" text-gray-800 mb-3 text-2xl">Personal Details</h2>
+            <h2 className=" text-gray-800 mb-3 text-2xl">Personal Details</h2>
             <p><b>Name:</b> {formData?.name || 'N/A'}</p>
             <p><b>Phone:</b> {formData?.phone || 'N/A'}</p>
             <p><b>Gender:</b> {formData?.gender || 'N/A'}</p>
@@ -61,9 +61,11 @@ export const KundliModal = ({isOpen, onClose, svgContent, formData}: KundliModal
             <p><b>City:</b> {formData?.city || 'N/A'}</p>
             <p><b>State:</b> {formData?.state || 'N/A'}</p>
           </div>
-          <div className="col-span-3 border rounded-lg bg-white px-6 py-4 shadow-sm"
-            dangerouslySetInnerHTML={{ __html: svgContent }}
-          />
+          <div className="col-span-3 flex justify-center md:justify-start">
+            <div className="col-span-3 border rounded-lg bg-white px-6 py-4 shadow-sm"
+              dangerouslySetInnerHTML={{ __html: svgContent }}
+            />
+          </div>  
         </div>
         <div className="p-2 border-t flex justify-between items-center">
           <p className="text-sm text-gray-600">
